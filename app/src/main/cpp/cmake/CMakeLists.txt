@@ -10,6 +10,12 @@ cmake_minimum_required(VERSION 3.4.1)
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
+# 为所有 c/c++ 编译器设置编译选项，可以把公用的选项放到这里，只能设置一次，不能重复设置，后者会覆盖前者
+#add_compile_options("-frtti -fexceptions")
+# 为 c++ 编译器设置编译选项，只能设置一次，不能重复设置，后者会覆盖前者
+set(CMAKE_CXX_FLAGS "-std=c++11 -w -frtti -fexceptions")
+# 为 c 编译器设置编译选项，只能设置一次，不能重复设置，后者会覆盖前者
+set(CMAKE_C_FLAGS "-w")
 set(CMAKE_ANDROID_NDK /Users/zanewang/Downloads/WorkSpace/SDK/Android-NDK/android-ndk-r14b)
 #set(CMAKE_INCLUDE_PATH )
 
@@ -20,12 +26,12 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        BaseObject.cpp
-        ChildObject.cpp
-        TimeUtils.cpp
-        ThreadUtils.cpp
-        Common.cpp
-        native-lib.cpp)
+        ../base/BaseObject.cpp
+        ../base/ChildObject.cpp
+        ../utils/TimeUtils.cpp
+        ../utils/ThreadUtils.cpp
+        ../Common.cpp
+        ../native-lib.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
