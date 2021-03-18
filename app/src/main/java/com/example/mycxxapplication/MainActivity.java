@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.SurfaceView;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +27,17 @@ public class MainActivity extends AppCompatActivity {
         // Example of a call to a native method
         TextView tv = findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
+
+        findViewById(R.id.test_bytebuffer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SurfaceView surfaceView1 = findViewById(R.id.test_bytebuffer_surface1);
+                SurfaceView surfaceView2 = findViewById(R.id.test_bytebuffer_surface2);
+                SurfaceView[] surfaces = new SurfaceView[]{surfaceView1, surfaceView2};
+                ByteBufferTest byteBufferTest = new ByteBufferTest(MainActivity.this);
+                byteBufferTest.start(surfaces);
+            }
+        });
     }
 
     /**
