@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 
 class BaseTest {
 
-    private Context mContext;
+    protected Context mContext;
 
     public BaseTest(Context context) {
         this.mContext = context;

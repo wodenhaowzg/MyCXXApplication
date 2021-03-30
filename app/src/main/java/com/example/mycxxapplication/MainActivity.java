@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
                 byteBufferTest.start(surfaces);
             }
         });
+
+        MemoryTest memoryTest = new MemoryTest(this);
+        memoryTest.startTest();
     }
 
     /**
