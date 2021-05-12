@@ -7,7 +7,7 @@
 #include <sys/sysinfo.h>
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_example_mycxxapplication_MainActivity_stringFromJNI(
+Java_com_example_mycxxapplication_ui_MainActivity_stringFromJNI(
         JNIEnv *env,
         jobject /* this */) {
     std::string hello = "Hello from C++";

@@ -3,7 +3,7 @@ package com.example.mycxxapplication;
 import android.content.Context;
 import android.util.Log;
 
-import java.nio.ByteBuffer;
+import com.example.mycxxapplication.jni.BaseTest;
 
 class JNITransDataTest extends BaseTest {
 
@@ -11,6 +11,10 @@ class JNITransDataTest extends BaseTest {
 
     public JNITransDataTest(Context context) {
         super(context);
+    }
+
+    @Override
+    public void startTest() {
     }
 
     private native void getDataFromCxx();

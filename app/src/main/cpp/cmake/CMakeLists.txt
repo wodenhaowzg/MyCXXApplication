@@ -1,16 +1,15 @@
-cmake_minimum_required(VERSION 3.4.1)
+# For more information about using CMake with Android Studio, read the
+# documentation: https://d.android.com/studio/projects/add-native-code.html
 
-# 定义项目名
+# Sets the minimum version of CMake required to build the native library.
+
+cmake_minimum_required(VERSION 3.10.2)
+
+# Declares and names the project.
+
 project("CXXApplication")
 
 set(TAG wzgtest)
-# 为所有 c/c++ 编译器设置编译选项，可以把公用的选项放到这里，只能设置一次，不能重复设置，后者会覆盖前者
-#add_compile_options("-frtti -fexceptions")
-# 为 c++ 编译器设置编译选项，只能设置一次，不能重复设置，后者会覆盖前者
-set(CMAKE_CXX_FLAGS "-std=c++11 -w -frtti -fexceptions")
-# 为 c 编译器设置编译选项，只能设置一次，不能重复设置，后者会覆盖前者
-set(CMAKE_C_FLAGS "-w")
-
 # 设置一些常用变量
 # NDK 目录路径
 set(CMAKE_ANDROID_NDK /Users/zanewang/Downloads/WorkSpace/SDK/Android-NDK/android-ndk-r14b)
@@ -58,12 +57,16 @@ add_library(native-lib # Sets the name of the library.
         # Provides a relative path to your source file(s).
         ../base/BaseObject.cpp
         ../base/ChildObject.cpp
+        ../base/BaseTypeTest.cpp
         ../base/ByteBufferTest.cpp
+        ../base/JniTransDataTest.cpp
+        ../base/CollectionTest.cpp
+        ../base/StringTest.cpp
+        ../base/PointerTest.cpp
+        ../base/MemoryTest.cpp
         ../utils/TimeUtils.cpp
         ../utils/ThreadUtils.cpp
         ../Common.cpp
-        ../base/JniTransDataTest.cpp
-        ../base/MemoryTest.cpp
         ../native-lib.cpp)
 
 target_link_libraries(native-lib # Specifies the target library.
