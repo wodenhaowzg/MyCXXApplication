@@ -2,7 +2,7 @@
 // Created by ZaneWang on 2021/3/30.
 //
 #include <string>
-#include "BaseObject.h"
+#include "object/BaseObject.h"
 #include <iostream>
 
 using namespace std;

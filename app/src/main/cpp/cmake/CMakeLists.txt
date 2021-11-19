@@ -13,7 +13,7 @@ set(TAG wzgtest)
 # 设置一些常用变量
 # NDK 目录路径
 set(CMAKE_ANDROID_NDK /Users/zanewang/Downloads/WorkSpace/SDK/Android-NDK/android-ndk-r14b)
-set(CMAKE_PROGRAM_PATH /Users/zanewang/Downloads/WorkSpace/MyGithubs/Android/MyCXXApplication/app)
+set(CMAKE_PROGRAM_PATH /Users/zanewang/Downloads/WorkSpace/MyGithub/Android/MyCXXApplication/app)
 
 #有序性，定义方法须放在前面
 FUNCTION(log tag message)
@@ -55,7 +55,7 @@ set_target_properties(libyuv # Specifies the target library.
 add_library(native-lib # Sets the name of the library.
         SHARED  # Sets the library as a shared library.
         # Provides a relative path to your source file(s).
-        ../base/BaseObject.cpp
+        ../base/object/BaseObject.cpp
         ../base/ChildObject.cpp
         ../base/BaseTypeTest.cpp
         ../base/ByteBufferTest.cpp
@@ -64,6 +64,7 @@ add_library(native-lib # Sets the name of the library.
         ../base/StringTest.cpp
         ../base/PointerTest.cpp
         ../base/MemoryTest.cpp
+        ../base/object/ObjectTest.cpp
         ../utils/TimeUtils.cpp
         ../utils/ThreadUtils.cpp
         ../Common.cpp

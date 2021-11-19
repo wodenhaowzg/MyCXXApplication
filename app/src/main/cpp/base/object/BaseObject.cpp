@@ -9,9 +9,9 @@
  */
 
 void BaseObject::toString() {
-    LOGD(BASETAG, "i am BaseObject, call toString");
+    LOGD(BASETAG, "BaseObject@%p", this);
 }
 
 void BaseObject::hashCode() {
-    LOGD(BASETAG, "i am BaseObject, call hashCode");
+    LOGD(BASETAG, "hashcode@%p", this);
 }

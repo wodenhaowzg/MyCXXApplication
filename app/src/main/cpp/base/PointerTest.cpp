@@ -1,7 +1,7 @@
 //
 // Created by ZaneWang on 2021/4/17.
 //
-#include "BaseObject.h"
+#include "object/BaseObject.h"
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_PointerTest_pointerTest(JNIEnv *env, jobject thiz) {
     stringstream ss;

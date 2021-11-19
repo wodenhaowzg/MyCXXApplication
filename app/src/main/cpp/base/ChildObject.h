@@ -5,7 +5,7 @@
 #ifndef MYCXXAPPLICATION_CHILDOBJECT_H
 #define MYCXXAPPLICATION_CHILDOBJECT_H
 
-#include "BaseObject.h"
+#include "object/BaseObject.h"
 
 /**
  * C++ 继承，有三种继承方式(JAVA不存在)，默认是 private 方式继承。

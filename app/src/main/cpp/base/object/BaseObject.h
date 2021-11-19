@@ -5,7 +5,7 @@
 #ifndef MYCXXAPPLICATION_BASEOBJECT_H
 #define MYCXXAPPLICATION_BASEOBJECT_H
 
-#include "../Common.h"
+#include "../../Common.h"
 
 /**
  * 基类头文件
@@ -15,7 +15,11 @@ class BaseObject {
 public:
 
     BaseObject(){
+        LOGD(BASETAG, "Constructor invoked! %p", this);
+    }
 
+    ~BaseObject(){
+        LOGD(BASETAG, "Destructor invoked! %p", this);
     }
 
     /**

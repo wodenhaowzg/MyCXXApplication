@@ -2,7 +2,7 @@
 // Created by ZaneWang on 2021/4/17.
 //
 
-#include "BaseObject.h"
+#include "object/BaseObject.h"
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTest_stringTest(JNIEnv *env, jobject thiz) {
     // 定义一个字符串buffer

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.mycxxapplication.R;
 import com.example.mycxxapplication.jni.CollectionTest;
+import com.example.mycxxapplication.jni.ObjectTest;
 import com.example.mycxxapplication.jni.PointerTest;
 import com.example.mycxxapplication.jni.StringTest;
 
@@ -57,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        PointerTest pointerTest = new PointerTest(this);
 //        pointerTest.startTest();
+
+        ObjectTest objectTest = new ObjectTest(this);
+        objectTest.startTest();
     }
 
     /**

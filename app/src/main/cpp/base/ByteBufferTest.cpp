@@ -40,8 +40,8 @@ jboolean renderYuvDecodedFrame(JNIEnv *env, jobject thiz, unsigned char *yuvFram
         return static_cast<jboolean>(false);
     }
 
-    auto *pSrc = (uint8_t *) buffer.bits;
-    memcpy(pSrc, yuvFrame, bufferLen);
+//    auto *pSrc = (uint8_t *) buffer.bits;
+//    memcpy(pSrc, yuvFrame, bufferLen);
 
 //    auto *pDst = (uint8_t *) buffer.bits;
 //    auto *pSrc = (uint8_t *) yuvFrame;
