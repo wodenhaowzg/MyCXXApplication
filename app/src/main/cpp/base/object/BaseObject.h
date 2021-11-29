@@ -5,21 +5,30 @@
 #ifndef MYCXXAPPLICATION_BASEOBJECT_H
 #define MYCXXAPPLICATION_BASEOBJECT_H
 
-#include "../../Common.h"
+#include "../Common.h"
 
 /**
  * 基类头文件
  */
 class BaseObject {
 
+private:
+    const char* mName = nullptr;
+public:
+    const char *getName() const;
+
+private:
+    BaseObject* mObj;
+
 public:
 
-    BaseObject(){
-        LOGD(BASETAG, "Constructor invoked! %p", this);
+    BaseObject(const char* name){
+        mName = name;
+        LOGD("wzgtest", "Object Constructor! Address = %p, name = %s", this, name);
     }
 
     ~BaseObject(){
-        LOGD(BASETAG, "Destructor invoked! %p", this);
+        LOGD("wzgtest", "Object Destructor! Address = %p, name = %s", this, mName);
     }
 
     /**
@@ -31,6 +40,11 @@ public:
      * 非虚方法。
      */
     void hashCode();
+
+
+    void lifeTest();
+
+    void transTest();
 };
 
 #endif //MYCXXAPPLICATION_BASEOBJECT_H

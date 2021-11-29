@@ -19,7 +19,7 @@ class ChildObject : protected BaseObject {
 
 public:
 
-    ChildObject(){
+    ChildObject(const char *name) : BaseObject(name) {
 
     }
 
