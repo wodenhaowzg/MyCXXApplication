@@ -2,11 +2,12 @@
 // Created by ZaneWang on 2021/4/17.
 //
 
+#include <sstream>
 #include "object/BaseObject.h"
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTest_stringTest(JNIEnv *env, jobject thiz) {
     // 定义一个字符串buffer
-    stringstream ss;
+    std::stringstream ss;
     // 字符串默认都是以 \0 空白字符结尾，所以字符数组的容量要比实际字符串长度多1
     char charArray[11] = {"Helloworld"};
     ss << charArray;
@@ -50,7 +51,9 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTe
     for (int i = 0; i < 16; ++i) {
         ss << container[i] << ", ";
     }
-    LOGI(BASETAG, ss.str().c_str());
+
+    const char* ccc = ss.str().c_str();
+//    LOGI(BASETAG, ccc);
     ss.clear();
     ss.str("");
     // 复制一段长度的字符串
@@ -58,7 +61,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTe
     for (int i = 0; i < 16; ++i) {
         ss << container[i];
     }
-    LOGI(BASETAG, ss.str().c_str());
+//    LOGI(BASETAG, ss.str().c_str());
     ss.clear();
     ss.str("");
 

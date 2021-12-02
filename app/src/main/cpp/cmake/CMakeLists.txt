@@ -56,6 +56,7 @@ add_library(native-lib # Sets the name of the library.
         SHARED  # Sets the library as a shared library.
         # Provides a relative path to your source file(s).
         ../base/object/BaseObject.cpp
+        ../base/object/Complex.cpp
         ../base/ChildObject.cpp
         ../base/BaseTypeTest.cpp
         ../base/ByteBufferTest.cpp
@@ -74,5 +75,4 @@ target_link_libraries(native-lib # Specifies the target library.
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib}
-        ${android-lib}
-        libyuv)
+        ${android-lib})

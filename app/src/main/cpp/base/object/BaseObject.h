@@ -5,7 +5,8 @@
 #ifndef MYCXXAPPLICATION_BASEOBJECT_H
 #define MYCXXAPPLICATION_BASEOBJECT_H
 
-#include "../Common.h"
+#include <jni.h>
+#include "../../Common.h"
 
 /**
  * 基类头文件
@@ -14,10 +15,6 @@ class BaseObject {
 
 private:
     const char* mName = nullptr;
-public:
-    const char *getName() const;
-
-private:
     BaseObject* mObj;
 
 public:
@@ -41,10 +38,11 @@ public:
      */
     void hashCode();
 
-
     void lifeTest();
 
     void transTest();
+
+    const char *getName() const;
 };
 
 #endif //MYCXXAPPLICATION_BASEOBJECT_H

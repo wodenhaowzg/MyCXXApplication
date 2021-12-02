@@ -3,11 +3,13 @@
 //
 #include "object/BaseObject.h"
 #include <vector>
-void printVector(vector<int> &vec, stringstream &ss);
+#include <sstream>
+
+void printVector(std::vector<int> &vec, std::stringstream &ss);
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_CollectionTest_arrayTest(JNIEnv *env, jobject thiz) {
     // 定义一个字符串buffer
-    stringstream ss;
+    std::stringstream ss;
     // 栈定义：申请一个数组对象
     int array1[] = {1, 2, 3, 4, 5};
     // 计算数组长度
@@ -16,7 +18,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_Collecti
     for (int i = 0; i < array1_len; ++i) {
         ss << "index: " << i << " - element: " << array1[i] << "\n";
     }
-    LOGI(BASETAG, ss.str().c_str());
+//    LOGI(BASETAG, ss.str().c_str());
     // 重置字符串buffer
     // 重置状态
     ss.clear();
@@ -25,7 +27,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_Collecti
     for (int element : array1) {
         ss << "element: " << element << "\n";
     }
-    LOGI(BASETAG, ss.str().c_str());
+//    LOGI(BASETAG, ss.str().c_str());
 
     // --------------------------------------------------------------------------------
 
@@ -33,7 +35,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_Collecti
     ss.clear();
     ss.str("");
     ss << "----------------------------------------- Pointer array test -----------------------------------------" << "\n";
-    LOGI(BASETAG, ss.str().c_str());
+//    LOGI(BASETAG, ss.str().c_str());
 
     ss.clear();
     ss.str("");
@@ -41,19 +43,19 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_Collecti
     for (int i = 0; i < array1_len; i++) {
         ss << "index: " << i << " - element: " << *(array2 + i) << " | " << array2 + i << "\n";
     }
-    LOGI(BASETAG, ss.str().c_str());
+//    LOGI(BASETAG, ss.str().c_str());
 }
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_CollectionTest_vectorTest(JNIEnv *env, jobject thiz) {
     // 定义一个字符串buffer
-    stringstream ss;
+    std::stringstream ss;
     ss << "----------------------------------------- Vector test -----------------------------------------" << "\n";
-    LOGI(BASETAG, ss.str().c_str());
+//    LOGI(BASETAG, ss.str().c_str());
     ss.clear();
     ss.str("");
 
     // 定义一个 vector 集合
-    vector<int> vec = {1, 2, 3, 4, 5};
+    std::vector<int> vec = {1, 2, 3, 4, 5};
     // 打印集合
     printVector(vec, ss);
     // 增加
@@ -79,11 +81,11 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_Collecti
     printVector(vec, ss);
 }
 
-void printVector(vector<int> &vec, stringstream &ss){
+void printVector(std::vector<int> &vec, std::stringstream &ss){
     for (int i = 0; i < vec.size(); ++i) {
         ss << "index: " << i << " - element: " << vec[i] << " | size: " << vec.size() << " | capacity: " << vec.capacity() << "\n";
     }
-    LOGI(BASETAG, ss.str().c_str());
+//    LOGI(BASETAG, ss.str().c_str());
     ss.clear();
     ss.str("");
 }

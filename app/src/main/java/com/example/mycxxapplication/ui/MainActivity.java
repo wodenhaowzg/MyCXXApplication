@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
 //        StringTest stringTest = new StringTest(this);
 //        stringTest.startTest();
 
-        PointerTest pointerTest = new PointerTest(this);
-        pointerTest.startTest();
+//        PointerTest pointerTest = new PointerTest(this);
+//        pointerTest.startTest();
 
-//        ObjectTest objectTest = new ObjectTest(this);
-//        objectTest.startTest();
+        ObjectTest objectTest = new ObjectTest(this);
+        objectTest.startTest();
     }
 
     /**
