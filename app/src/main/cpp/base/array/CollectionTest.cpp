@@ -1,7 +1,7 @@
 //
 // Created by ZaneWang on 2021/4/17.
 //
-#include "object/BaseObject.h"
+#include "../object/BaseObject.h"
 #include <vector>
 #include <sstream>
 

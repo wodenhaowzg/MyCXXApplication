@@ -2,9 +2,8 @@
 // Created by ZaneWang on 6/2/21.
 //
 #include "BaseObject.h"
-#include "Complex.h"
-
-void createObject();
+#include "bean/Complex.h"
+#include "ObjectLifeTest.h"
 
 void transObject();
 
@@ -16,9 +15,14 @@ void changeObject();
 
 void baseOperator();
 
+void test1111(uint32_t aa, uint32_t &bb);
+
+uint32_t mtest = 0;
+
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ObjectTest_structTest(JNIEnv *env, jobject thiz) {
     // 1、对象的创建和释放。
-//    createObject();
+    ObjectLifeTest objectLifeTest;
+    objectLifeTest.startTest();
 //    LOGD(BASETAG, "========================================分隔符================================");
     // 2、对象的传递。
 //    transObject();
@@ -26,22 +30,30 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ObjectTe
     // 3、对象的改变
 //    changeObject();
     // 4、对象基本使用
-    baseOperator();
+//    baseOperator();
+
+//    LOGD(BASETAG, "============000: %p", &mtest);
+//    test1111(mtest, mtest);
+//    LOGD(BASETAG, "============222: %d, %p", mtest, &mtest);
 }
 
-/**
- * 对象可以在栈和堆两中内存空间上创建。其中在栈上创建的对象，其生命周期由系统管理，而在堆上创建的生命周期，需要自己管理，new/delete
- */
-void createObject() {
-    // 对象的创建有方式有两种。
-    // 在栈空间创建
-    BaseObject obj1("obj1");
-    LOGD(BASETAG, "我是在栈空间上创建的obj1，地址是=%p", &obj1);
-    // 在堆空间创建
-    BaseObject *obj2 = new BaseObject("obj2");
-    LOGD(BASETAG, "我是在堆空间上创建的obj2，地址是=%p", obj2);
-    delete obj2;
-    LOGD(BASETAG, "手动删除obj2，而obj1则不用管，超出作用域，系统会自动释放", obj2);
+extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ObjectTest_stringTest(JNIEnv *env, jobject thiz, jstring str) {
+    // 测试字符串转移
+//    m_pStringTest = new StringTest();
+    const char *localStr = env->GetStringUTFChars(str, nullptr);
+//    LOGD(BASETAG, "获取到字符串，地址 = %p", &localStr);
+//    m_pStringTest->m_string = localStr;
+//    LOGD(BASETAG, "字符串已转移到 StringTest 对象上，检查是否存在 = %s，地址 = %p", m_pStringTest->m_string, &m_pStringTest->m_string);
+    env->ReleaseStringUTFChars(str, localStr);
+//    LOGD(BASETAG, "字符串已转移到 StringTest 对象上，检查是否存在 = %s，地址 = %p", m_pStringTest->m_string, &m_pStringTest->m_string);
+//    delete m_pStringTest;
+}
+
+
+void test1111(uint32_t aa, uint32_t &bb) {
+    LOGD(BASETAG, "============111 %p, %p", &aa, &bb);
+    bb = 3;
+    aa = 5;
 }
 
 /**
@@ -51,7 +63,7 @@ void transObject() {
     BaseObject obj1("obj1");
     LOGD(BASETAG, "我是在栈空间上创建的obj1，地址是=%p", &obj1);
     transObj1(obj1);
-    BaseObject *obj2 = new BaseObject("obj2");
+    BaseObject *obj2 = new BaseObject("m_pObj");
     LOGD(BASETAG, "我是在堆空间上创建的obj2，地址是=%p", obj2);
     transObj2(obj2);
     delete obj2;
@@ -63,14 +75,14 @@ void transObject() {
 void changeObject() {
     BaseObject obj1("obj1");
     LOGD(BASETAG, "我是在栈空间上创建的obj1，地址是=%p", &obj1);
-    BaseObject *obj2 = new BaseObject("obj2");
+    BaseObject *obj2 = new BaseObject("m_pObj");
     LOGD(BASETAG, "我是在堆空间上创建的obj2，地址是=%p", obj2);
     BaseObject *obj3 = new BaseObject("obj3");
     LOGD(BASETAG, "我是在堆空间上创建的obj3，地址是=%p", obj3);
     obj1 = *obj2;
-    LOGD(BASETAG, "将 obj2 赋值给 obj1 后，obj1 地址是=%p，obj2 地址是=%p", &obj1, obj2);
+    LOGD(BASETAG, "将 m_pObj 赋值给 obj1 后，obj1 地址是=%p，m_pObj 地址是=%p", &obj1, obj2);
     obj2 = obj3;
-    LOGD(BASETAG, "将 obj3 赋值给 obj2 后，obj2 地址是=%p，obj3 地址是=%p", obj2, obj3);
+    LOGD(BASETAG, "将 obj3 赋值给 m_pObj 后，m_pObj 地址是=%p，obj3 地址是=%p", obj2, obj3);
 }
 
 void baseOperator() {
@@ -101,5 +113,3 @@ void transObj1(BaseObject obj1) {
 void transObj2(BaseObject *obj2) {
     LOGD(BASETAG, "接收到obj2，地址是=%p", obj2);
 }
-
-

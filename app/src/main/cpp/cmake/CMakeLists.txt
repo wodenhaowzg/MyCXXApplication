@@ -56,16 +56,19 @@ add_library(native-lib # Sets the name of the library.
         SHARED  # Sets the library as a shared library.
         # Provides a relative path to your source file(s).
         ../base/object/BaseObject.cpp
-        ../base/object/Complex.cpp
-        ../base/ChildObject.cpp
-        ../base/BaseTypeTest.cpp
-        ../base/ByteBufferTest.cpp
+        ../base/object/bean/Complex.cpp
+        ../base/object/bean/MyString.cpp
+        ../base/object/ChildObject.cpp
+        ../base/BaseTest.cpp
+        ../base/memory/ByteBufferTest.cpp
         ../base/JniTransDataTest.cpp
-        ../base/CollectionTest.cpp
+        ../base/array/CollectionTest.cpp
         ../base/StringTest.cpp
         ../base/PointerTest.cpp
-        ../base/MemoryTest.cpp
+        ../base/memory/MemoryTest.cpp
+        ../base/file/FileTest.cpp
         ../base/object/ObjectTest.cpp
+        ../base/object/ObjectLifeTest.cpp
         ../utils/TimeUtils.cpp
         ../utils/ThreadUtils.cpp
         ../Common.cpp

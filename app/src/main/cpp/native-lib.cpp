@@ -1,7 +1,7 @@
 #include <jni.h>
 #include <string>
 #include <android/log.h>
-#include "base/ChildObject.h"
+#include "base/object/ChildObject.h"
 #include "utils/TimeUtils.h"
 
 #include <sys/sysinfo.h>

@@ -1,15 +1,8 @@
 package com.example.mycxxapplication.jni;
 
-import android.content.Context;
-import android.util.Log;
-
-public class CollectionTest extends BaseTest {
+public class CollectionTest implements TestInterface {
 
     private static final String TAG = "WZGTEST";
-
-    public CollectionTest(Context context) {
-        super(context);
-    }
 
     @Override
     public void startTest() {

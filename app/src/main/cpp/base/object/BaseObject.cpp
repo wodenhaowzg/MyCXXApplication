@@ -24,11 +24,11 @@ void BaseObject::lifeTest() {
     }
 }
 
-BaseObject m_transObj("2") ;
+BaseObject m_transObj("2");
 
 void BaseObject::transTest() {
     BaseObject obj("transObj");
-    LOGD(BASETAG, "Create trans obj = %p, global obj = %p", &obj, &m_transObj);
+    LOGD(BASETAG, "Create trans m_obj = %p, global m_obj = %p", &obj, &m_transObj);
     transObject(obj, obj);
 }
 
@@ -38,10 +38,23 @@ const char *BaseObject::getName() const {
 
 
 void transObject(BaseObject obj1, BaseObject &obj2) {
-    LOGD(BASETAG, "Recv trans obj1 = %p, obj2 = %p", &obj1, &obj2);
-    LOGD(BASETAG, " 000 global obj = %p, name = %s", &m_transObj, m_transObj.getName());
+    LOGD(BASETAG, "Recv trans obj1 = %p, m_pObj = %p", &obj1, &obj2);
+    LOGD(BASETAG, " 000 global m_obj = %p, name = %s", &m_transObj, m_transObj.getName());
     m_transObj = obj2;
-    LOGD(BASETAG, "global obj = %p, name = %s", &m_transObj, m_transObj.getName());
+    LOGD(BASETAG, "global m_obj = %p, name = %s", &m_transObj, m_transObj.getName());
 }
+
+
+//class Child {
+//
+//};
+//
+//class Object {
+//private:
+//    int m_a = 1;
+//    int m_b = 2;
+//    Child m_child;
+//    Child* m_child2 = new Child();
+//};
 
 

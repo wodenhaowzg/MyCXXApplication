@@ -5,7 +5,8 @@
 #ifndef MYCXXAPPLICATION_COMPLEX_H
 #define MYCXXAPPLICATION_COMPLEX_H
 
-#include "BaseObject.h"
+#include "../BaseObject.h"
+#include <iostream>
 
 class Complex {
 

@@ -1,12 +1,6 @@
 package com.example.mycxxapplication.jni;
 
-import android.content.Context;
-
-public class PointerTest extends BaseTest{
-
-    public PointerTest(Context context) {
-        super(context);
-    }
+public class PointerTest implements TestInterface {
 
     @Override
     public void startTest() {

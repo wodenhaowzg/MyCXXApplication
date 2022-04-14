@@ -1,12 +1,6 @@
 package com.example.mycxxapplication.jni;
 
-import android.content.Context;
-
-public class StringTest extends BaseTest{
-
-    public StringTest(Context context) {
-        super(context);
-    }
+public class StringTest implements TestInterface {
 
     @Override
     public void startTest() {

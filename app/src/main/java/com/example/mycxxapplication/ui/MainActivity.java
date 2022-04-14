@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.mycxxapplication.R;
+import com.example.mycxxapplication.jni.BaseTest;
 import com.example.mycxxapplication.jni.CollectionTest;
 import com.example.mycxxapplication.jni.ObjectTest;
 import com.example.mycxxapplication.jni.PointerTest;
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+        BaseTest baseTest = new BaseTest(this);
+        baseTest.startTest();
+
 //        MemoryTest memoryTest = new MemoryTest(this);
 //        memoryTest.startTest();
 
@@ -59,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 //        PointerTest pointerTest = new PointerTest(this);
 //        pointerTest.startTest();
 
-        ObjectTest objectTest = new ObjectTest(this);
+        ObjectTest objectTest = new ObjectTest();
         objectTest.startTest();
     }
 
