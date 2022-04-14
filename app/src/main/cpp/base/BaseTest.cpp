@@ -154,7 +154,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_BaseTest
     LOGD(BASETAG, "vIntUL = %lu", vIntUL);
 
     // 测试命名空间
-    int a = 300;
-    using namespace A::a;
-    LOGD(BASETAG, "a = %d", a);
+//    int a = 300;
+//    using namespace A::a;
+//    LOGD(BASETAG, "a = %d", a);
 }

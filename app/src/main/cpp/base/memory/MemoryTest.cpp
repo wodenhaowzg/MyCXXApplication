@@ -6,7 +6,6 @@
 #include <malloc.h>
 #include <cstdint>
 #include <string.h>
-#include "libyuv/convert.h"
 
 struct DataStruct {
     uint8_t *data;
