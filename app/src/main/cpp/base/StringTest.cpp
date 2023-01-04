@@ -5,13 +5,15 @@
 #include <sstream>
 #include "object/BaseObject.h"
 
+void printStringArray(const char *pStringArray[], int length);
+
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTest_stringTest(JNIEnv *env, jobject thiz) {
     // 定义一个字符串buffer
     std::stringstream ss;
     // 字符串默认都是以 \0 空白字符结尾，所以字符数组的容量要比实际字符串长度多1
     char charArray[11] = {"Helloworld"};
     ss << charArray;
-//    LOGI(BASETAG, ss.str().c_str());
+//    LOGI_TWO(BASETAG, ss.str().c_str());
     ss.clear();
     ss.str("");
 
@@ -19,7 +21,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTe
     for (int i = 0; i < len; ++i) {
         ss << charArray[i] << ", ";
     }
-//    LOGI(BASETAG, ss.str().c_str());
+//    LOGI_TWO(BASETAG, ss.str().c_str());
     ss.clear();
     ss.str("");
 
@@ -30,7 +32,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTe
     for (int i = 0; i < len; ++i) {
         ss << *(pCharArray + i) << ", ";
     }
-//    LOGI(BASETAG, ss.str().c_str());
+//    LOGI_TWO(BASETAG, ss.str().c_str());
     ss.clear();
     ss.str("");
 
@@ -40,7 +42,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTe
     len = strlen(charArray2);
     ss << "String: " << charArray;
     ss << ", String len: " << len;
-//    LOGI(BASETAG, ss.str().c_str());
+//    LOGI_TWO(BASETAG, ss.str().c_str());
     ss.clear();
     ss.str("");
 
@@ -52,8 +54,8 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTe
         ss << container[i] << ", ";
     }
 
-    const char* ccc = ss.str().c_str();
-//    LOGI(BASETAG, ccc);
+    const char *ccc = ss.str().c_str();
+//    LOGI_TWO(BASETAG, ccc);
     ss.clear();
     ss.str("");
     // 复制一段长度的字符串
@@ -61,7 +63,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTe
     for (int i = 0; i < 16; ++i) {
         ss << container[i];
     }
-//    LOGI(BASETAG, ss.str().c_str());
+//    LOGI_TWO(BASETAG, ss.str().c_str());
     ss.clear();
     ss.str("");
 
@@ -69,4 +71,25 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTe
     // 拼接 strcat
     // 查找字符 strchr
     // 查找字符串 strstr
+}
+
+extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_StringTest_nativeTransCopyString(JNIEnv *env, jobject thiz, jobjectArray stringArray) {
+    int len = env->GetArrayLength(stringArray);
+    const char *cstrArray[len];
+    for (int i = 0; i < len; ++i) {
+        auto jstringRef = (jstring) env->GetObjectArrayElement(stringArray, i);
+        const char *cstrRef = env->GetStringUTFChars(jstringRef, nullptr);
+        cstrArray[i] = cstrRef;
+    }
+    printStringArray(cstrArray, len);
+    for (int i = 0; i < len; ++i) {
+        auto jstringRef = (jstring) env->GetObjectArrayElement(stringArray, i);
+        env->ReleaseStringUTFChars(jstringRef, cstrArray[i]);
+    }
+}
+
+void printStringArray(const char *pStringArray[], int length) {
+    for (int i = 0; i < length; ++i) {
+        LOGD("Print string: %s", pStringArray[i]);
+    }
 }

@@ -18,7 +18,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_Collecti
     for (int i = 0; i < array1_len; ++i) {
         ss << "index: " << i << " - element: " << array1[i] << "\n";
     }
-//    LOGI(BASETAG, ss.str().c_str());
+//    LOGI_TWO(BASETAG, ss.str().c_str());
     // 重置字符串buffer
     // 重置状态
     ss.clear();
@@ -27,7 +27,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_Collecti
     for (int element : array1) {
         ss << "element: " << element << "\n";
     }
-//    LOGI(BASETAG, ss.str().c_str());
+//    LOGI_TWO(BASETAG, ss.str().c_str());
 
     // --------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_Collecti
     ss.clear();
     ss.str("");
     ss << "----------------------------------------- Pointer array test -----------------------------------------" << "\n";
-//    LOGI(BASETAG, ss.str().c_str());
+//    LOGI_TWO(BASETAG, ss.str().c_str());
 
     ss.clear();
     ss.str("");
@@ -43,14 +43,14 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_Collecti
     for (int i = 0; i < array1_len; i++) {
         ss << "index: " << i << " - element: " << *(array2 + i) << " | " << array2 + i << "\n";
     }
-//    LOGI(BASETAG, ss.str().c_str());
+//    LOGI_TWO(BASETAG, ss.str().c_str());
 }
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_CollectionTest_vectorTest(JNIEnv *env, jobject thiz) {
     // 定义一个字符串buffer
     std::stringstream ss;
     ss << "----------------------------------------- Vector test -----------------------------------------" << "\n";
-//    LOGI(BASETAG, ss.str().c_str());
+//    LOGI_TWO(BASETAG, ss.str().c_str());
     ss.clear();
     ss.str("");
 
@@ -85,7 +85,7 @@ void printVector(std::vector<int> &vec, std::stringstream &ss){
     for (int i = 0; i < vec.size(); ++i) {
         ss << "index: " << i << " - element: " << vec[i] << " | size: " << vec.size() << " | capacity: " << vec.capacity() << "\n";
     }
-//    LOGI(BASETAG, ss.str().c_str());
+//    LOGI_TWO(BASETAG, ss.str().c_str());
     ss.clear();
     ss.str("");
 }

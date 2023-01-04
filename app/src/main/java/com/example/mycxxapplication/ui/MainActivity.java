@@ -1,22 +1,20 @@
 package com.example.mycxxapplication.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.graphics.Point;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
+import android.view.View;
+
+import androidx.databinding.DataBindingUtil;
 
 import com.example.mycxxapplication.R;
-import com.example.mycxxapplication.jni.BaseTest;
-import com.example.mycxxapplication.jni.CollectionTest;
-import com.example.mycxxapplication.jni.ObjectTest;
-import com.example.mycxxapplication.jni.PointerTest;
-import com.example.mycxxapplication.jni.StringTest;
+import com.example.mycxxapplication.databinding.ActivityMainBinding;
+import com.example.mycxxapplication.libyuv.LibYuvTest;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
+    private ActivityMainBinding mViewBinding;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -26,13 +24,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mViewBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        Log.d("TimeUtils", "java currentTimeMillis : " + System.currentTimeMillis());
-        Log.d("TimeUtils", "java nanoTime : " + System.nanoTime());
-        // Example of a call to a native method
-        TextView tv = findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        mViewBinding.mainTestLibyuv.setOnClickListener(v -> startActivity(new Intent(mContext, LibYuvTestActivity.class)));
 
 //        findViewById(R.id.test_bytebuffer).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -45,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        BaseTest baseTest = new BaseTest(this);
-        baseTest.startTest();
+//        BaseTest baseTest = new BaseTest(this);
+//        baseTest.startTest();
 
 //        MemoryTest memoryTest = new MemoryTest(this);
 //        memoryTest.startTest();
@@ -57,21 +51,19 @@ public class MainActivity extends AppCompatActivity {
 //        CollectionTe.starst collectionTest = new CollectionTest(this);
 //        collectionTesttTest();
 
-//        StringTest stringTest = new StringTest(this);
+//        StringTest stringTest = new StringTest();
 //        stringTest.startTest();
 
 //        PointerTest pointerTest = new PointerTest(this);
 //        pointerTest.startTest();
 
-        ObjectTest objectTest = new ObjectTest();
-        objectTest.startTest();
+//        ObjectTest objectTest = new ObjectTest();
+//        objectTest.startTest();
+
+//        ComponentTest componentTest = new ComponentTest();
+//        componentTest.startTest();
+
+//        JNITransDataTest jniTransDataTest = new JNITransDataTest(this);
+//        jniTransDataTest.startTest();
     }
-
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
-
-    public native void testBase();
 }

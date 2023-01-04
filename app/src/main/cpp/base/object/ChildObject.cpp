@@ -5,9 +5,9 @@
 #include "ChildObject.h"
 
 void ChildObject::toString() {
-    LOGD(BASETAG, "i am ChildObject, call toString");
+    LOGD_TWO(BASETAG, "i am ChildObject, call toString");
 }
 
 void ChildObject::hashCode() {
-    LOGD(BASETAG, "i am ChildObject, call hashCode!");
+    LOGD_TWO(BASETAG, "i am ChildObject, call hashCode!");
 }

@@ -38,53 +38,53 @@ int a = 200;
 
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_BaseTest_nativeStartTest(JNIEnv *env, jobject thiz) {
-    LOGD(BASETAG, "========================================================================");
+    LOGD_TWO(BASETAG, "========================================================================");
     // C++ 基本类型
     // 各个基本类型所占的内存大小
-    LOGD(BASETAG, "char = %d", sizeof(char)); // 1
-    LOGD(BASETAG, "bool = %d", sizeof(bool)); // 1
-    LOGD(BASETAG, "short = %d", sizeof(short)); // 2
-    LOGD(BASETAG, "int = %d", sizeof(int)); // 4
-    LOGD(BASETAG, "long = %d", sizeof(long)); // 8
-    LOGD(BASETAG, "long long = %d", sizeof(long long)); // 8
-    LOGD(BASETAG, "float = %d", sizeof(float)); // 4
-    LOGD(BASETAG, "double = %d", sizeof(double)); // 8
+    LOGD_TWO(BASETAG, "char = %d", sizeof(char)); // 1
+    LOGD_TWO(BASETAG, "bool = %d", sizeof(bool)); // 1
+    LOGD_TWO(BASETAG, "short = %d", sizeof(short)); // 2
+    LOGD_TWO(BASETAG, "int = %d", sizeof(int)); // 4
+    LOGD_TWO(BASETAG, "long = %d", sizeof(long)); // 8
+    LOGD_TWO(BASETAG, "long long = %d", sizeof(long long)); // 8
+    LOGD_TWO(BASETAG, "float = %d", sizeof(float)); // 4
+    LOGD_TWO(BASETAG, "double = %d", sizeof(double)); // 8
 
-    LOGD(BASETAG, "short short = %d", sizeof(short short)); // 2
-    LOGD(BASETAG, "short int = %d", sizeof(short int)); // 2
-    LOGD(BASETAG, "long int = %d", sizeof(long int)); // 8
-    LOGD(BASETAG, "long double = %d", sizeof(long double)); // 16
-    LOGD(BASETAG, "long long int = %d", sizeof(long long int)); // 8
+    LOGD_TWO(BASETAG, "short short = %d", sizeof(short short)); // 2
+    LOGD_TWO(BASETAG, "short int = %d", sizeof(short int)); // 2
+    LOGD_TWO(BASETAG, "long int = %d", sizeof(long int)); // 8
+    LOGD_TWO(BASETAG, "long double = %d", sizeof(long double)); // 16
+    LOGD_TWO(BASETAG, "long long int = %d", sizeof(long long int)); // 8
 
-    LOGD(BASETAG, "========================================================================");
+    LOGD_TWO(BASETAG, "========================================================================");
 
     // 各个基本类型最大值
-    LOGD(BASETAG, "max char = %d", std::numeric_limits<char>::max());
-    LOGD(BASETAG, "max bool = %d", std::numeric_limits<bool>::max());
-    LOGD(BASETAG, "max short = %d", std::numeric_limits<short>::max());
-    LOGD(BASETAG, "max int = %d", std::numeric_limits<int>::max());
-    LOGD(BASETAG, "max long = %ld", std::numeric_limits<long>::max());
-    LOGD(BASETAG, "max long long = %lld", std::numeric_limits<long long>::max());
-    LOGD(BASETAG, "max float = %f", std::numeric_limits<float>::max());
-    LOGD(BASETAG, "max double = %lf", std::numeric_limits<double>::max());
+    LOGD_TWO(BASETAG, "max char = %d", std::numeric_limits<char>::max());
+    LOGD_TWO(BASETAG, "max bool = %d", std::numeric_limits<bool>::max());
+    LOGD_TWO(BASETAG, "max short = %d", std::numeric_limits<short>::max());
+    LOGD_TWO(BASETAG, "max int = %d", std::numeric_limits<int>::max());
+    LOGD_TWO(BASETAG, "max long = %ld", std::numeric_limits<long>::max());
+    LOGD_TWO(BASETAG, "max long long = %lld", std::numeric_limits<long long>::max());
+    LOGD_TWO(BASETAG, "max float = %f", std::numeric_limits<float>::max());
+    LOGD_TWO(BASETAG, "max double = %lf", std::numeric_limits<double>::max());
 
-    LOGD(BASETAG, "max unsigned char = %u", std::numeric_limits<unsigned char>::max());
-    LOGD(BASETAG, "max unsigned short = %u", std::numeric_limits<unsigned short>::max());
-    LOGD(BASETAG, "max unsigned int = %u", std::numeric_limits<unsigned int>::max());
-    LOGD(BASETAG, "max unsigned long = %lu", std::numeric_limits<unsigned long>::max());
-    LOGD(BASETAG, "max unsigned long long = %llu", std::numeric_limits<unsigned long long>::max());
+    LOGD_TWO(BASETAG, "max unsigned char = %u", std::numeric_limits<unsigned char>::max());
+    LOGD_TWO(BASETAG, "max unsigned short = %u", std::numeric_limits<unsigned short>::max());
+    LOGD_TWO(BASETAG, "max unsigned int = %u", std::numeric_limits<unsigned int>::max());
+    LOGD_TWO(BASETAG, "max unsigned long = %lu", std::numeric_limits<unsigned long>::max());
+    LOGD_TWO(BASETAG, "max unsigned long long = %llu", std::numeric_limits<unsigned long long>::max());
 
-    LOGD(BASETAG, "max short short = %hd", std::numeric_limits<short short>::max());
-    LOGD(BASETAG, "max short int = %hd", std::numeric_limits<short int>::max());
-    LOGD(BASETAG, "max long int = %ld", std::numeric_limits<long int>::max());
-    LOGD(BASETAG, "max long double = %Lf", std::numeric_limits<long double>::max());
+    LOGD_TWO(BASETAG, "max short short = %hd", std::numeric_limits<short short>::max());
+    LOGD_TWO(BASETAG, "max short int = %hd", std::numeric_limits<short int>::max());
+    LOGD_TWO(BASETAG, "max long int = %ld", std::numeric_limits<long int>::max());
+    LOGD_TWO(BASETAG, "max long double = %Lf", std::numeric_limits<long double>::max());
 
-    LOGD(BASETAG, "max unsigned short short = %hu", std::numeric_limits<unsigned short short>::max());
-    LOGD(BASETAG, "max unsigned short int = %hu", std::numeric_limits<unsigned short int>::max());
-    LOGD(BASETAG, "max unsigned long int = %lu", std::numeric_limits<unsigned long int>::max());
+    LOGD_TWO(BASETAG, "max unsigned short short = %hu", std::numeric_limits<unsigned short short>::max());
+    LOGD_TWO(BASETAG, "max unsigned short int = %hu", std::numeric_limits<unsigned short int>::max());
+    LOGD_TWO(BASETAG, "max unsigned long int = %lu", std::numeric_limits<unsigned long int>::max());
 
-    LOGD(BASETAG, "max long long int = %ld", std::numeric_limits<long long int>::max());
-    LOGD(BASETAG, "max unsigned long long int = %lu", std::numeric_limits<unsigned long long int>::max());
+    LOGD_TWO(BASETAG, "max long long int = %ld", std::numeric_limits<long long int>::max());
+    LOGD_TWO(BASETAG, "max unsigned long long int = %lu", std::numeric_limits<unsigned long long int>::max());
 
     // 基本类型变量
     char vChar = 'a';
@@ -99,18 +99,18 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_BaseTest
     char vCharArray[] = "abc";
     const char *vCharPointer = "abc-pointer";
 
-    LOGD(BASETAG, "vChar = %c", vChar);
-    LOGD(BASETAG, "vBool = %d", vBool);
-    LOGD(BASETAG, "vShort = %d", vShort);
-    LOGD(BASETAG, "vInt = %d", vInt);
-    LOGD(BASETAG, "vLong = %ld", vLong);
-    LOGD(BASETAG, "vLongLong = %lld", vLongLong);
-    LOGD(BASETAG, "vFloat = %f", vFloat);
-    LOGD(BASETAG, "vDouble = %lf", vDouble);
-    LOGD(BASETAG, "vCharArray = %s", vCharArray);
-    LOGD(BASETAG, "vCharPointer = %s", vCharPointer);
+    LOGD_TWO(BASETAG, "vChar = %c", vChar);
+    LOGD_TWO(BASETAG, "vBool = %d", vBool);
+    LOGD_TWO(BASETAG, "vShort = %d", vShort);
+    LOGD_TWO(BASETAG, "vInt = %d", vInt);
+    LOGD_TWO(BASETAG, "vLong = %ld", vLong);
+    LOGD_TWO(BASETAG, "vLongLong = %lld", vLongLong);
+    LOGD_TWO(BASETAG, "vFloat = %f", vFloat);
+    LOGD_TWO(BASETAG, "vDouble = %lf", vDouble);
+    LOGD_TWO(BASETAG, "vCharArray = %s", vCharArray);
+    LOGD_TWO(BASETAG, "vCharPointer = %s", vCharPointer);
 
-    LOGD(BASETAG, "========================================================================");
+    LOGD_TWO(BASETAG, "========================================================================");
 
     /**
      * 符号修饰
@@ -137,24 +137,24 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_BaseTest
 
     unsigned long int vIntUL = 1238;
 
-    LOGD(BASETAG, "vCharU = %c", vCharU);
-    LOGD(BASETAG, "vCharArrayU = %s", vCharArrayU);
-    LOGD(BASETAG, "vShortU = %u", vShortU);
-    LOGD(BASETAG, "vIntU = %u", vIntU);
-    LOGD(BASETAG, "vLongU = %lu", vLongU);
-    LOGD(BASETAG, "vLongLongU = %llu", vLongLongU);
+    LOGD_TWO(BASETAG, "vCharU = %c", vCharU);
+    LOGD_TWO(BASETAG, "vCharArrayU = %s", vCharArrayU);
+    LOGD_TWO(BASETAG, "vShortU = %u", vShortU);
+    LOGD_TWO(BASETAG, "vIntU = %u", vIntU);
+    LOGD_TWO(BASETAG, "vLongU = %lu", vLongU);
+    LOGD_TWO(BASETAG, "vLongLongU = %llu", vLongLongU);
 
-    LOGD(BASETAG, "vShortS = %hd", vShortS);
-    LOGD(BASETAG, "vIntS = %hd", vIntS);
-    LOGD(BASETAG, "vShortUS = %hu", vShortUS);
-    LOGD(BASETAG, "vIntUS = %hu", vIntUS);
+    LOGD_TWO(BASETAG, "vShortS = %hd", vShortS);
+    LOGD_TWO(BASETAG, "vIntS = %hd", vIntS);
+    LOGD_TWO(BASETAG, "vShortUS = %hu", vShortUS);
+    LOGD_TWO(BASETAG, "vIntUS = %hu", vIntUS);
 
-    LOGD(BASETAG, "vIntL = %ld", vIntL);
-    LOGD(BASETAG, "vDoubleL = %lf", vDoubleL);
-    LOGD(BASETAG, "vIntUL = %lu", vIntUL);
+    LOGD_TWO(BASETAG, "vIntL = %ld", vIntL);
+    LOGD_TWO(BASETAG, "vDoubleL = %lf", vDoubleL);
+    LOGD_TWO(BASETAG, "vIntUL = %lu", vIntUL);
 
     // 测试命名空间
 //    int a = 300;
 //    using namespace A::a;
-//    LOGD(BASETAG, "a = %d", a);
+//    LOGD_TWO(BASETAG, "a = %d", a);
 }

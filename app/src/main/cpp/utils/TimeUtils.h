@@ -5,10 +5,7 @@
 #ifndef MYCXXAPPLICATION_TIMEUTILS_H
 #define MYCXXAPPLICATION_TIMEUTILS_H
 
-#include "../Common.h"
-#include <ctime>
-
-static struct timeval tv;
+#include "Timers.h"
 
 class TimeUtils {
 
@@ -16,6 +13,8 @@ public:
     static long long currentTimeMillis();
 
     static long long nanoTime();
+
+    static long long uptimeMillis();
 };
 
 
