@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.mycxxapplication.R;
 import com.example.mycxxapplication.databinding.ActivityMainBinding;
+import com.example.mycxxapplication.jni.ObjectTest;
+import com.example.mycxxapplication.jni.ThreadTest;
 import com.example.mycxxapplication.libyuv.LibYuvTest;
 
 public class MainActivity extends BaseActivity {
@@ -65,5 +67,8 @@ public class MainActivity extends BaseActivity {
 
 //        JNITransDataTest jniTransDataTest = new JNITransDataTest(this);
 //        jniTransDataTest.startTest();
+
+        ThreadTest threadTest = new ThreadTest(this);
+        threadTest.startTest();
     }
 }
