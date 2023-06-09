@@ -11,6 +11,8 @@ void transObj1(BaseObject object);
 
 void transObj2(BaseObject *pObject);
 
+void transObj3(BaseObject& obj3);
+
 void changeObject();
 
 void baseOperator();
@@ -21,11 +23,11 @@ uint32_t mtest = 0;
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ObjectTest_structTest(JNIEnv *env, jobject thiz) {
     // 1、对象的创建和释放。
-    ObjectLifeTest objectLifeTest;
-    objectLifeTest.startTest();
+//    ObjectLifeTest objectLifeTest;
+//    objectLifeTest.startTest();
 //    LOGD_TWO(BASETAG, "========================================分隔符================================");
     // 2、对象的传递。
-//    transObject();
+    transObject();
 //    LOGD_TWO(BASETAG, "========================================分隔符================================");
     // 3、对象的改变
 //    changeObject();
@@ -60,13 +62,16 @@ void test1111(uint32_t aa, uint32_t &bb) {
  * 对象在方法之间传递时，引用传递会自动生成一个新的临时对象，指针传递则不会自动生成临时对象。
  */
 void transObject() {
-    BaseObject obj1("obj1");
-    LOGD_TWO(BASETAG, "我是在栈空间上创建的obj1，地址是=%p", &obj1);
-    transObj1(obj1);
-    BaseObject *obj2 = new BaseObject("m_pObj");
-    LOGD_TWO(BASETAG, "我是在堆空间上创建的obj2，地址是=%p", obj2);
-    transObj2(obj2);
-    delete obj2;
+//    BaseObject obj1("obj1");
+//    LOGD_TWO(BASETAG, "我是在栈空间上创建的obj1，地址是=%p", &obj1);
+//    transObj1(obj1);
+//    BaseObject *obj2 = new BaseObject("m_pObj");
+//    LOGD_TWO(BASETAG, "我是在堆空间上创建的obj2，地址是=%p", obj2);
+//    transObj2(obj2);
+//    delete obj2;
+
+    BaseObject obj3("obj3");
+    transObj3(obj3);
 }
 
 /**
@@ -112,4 +117,12 @@ void transObj1(BaseObject obj1) {
 
 void transObj2(BaseObject *obj2) {
     LOGD_TWO(BASETAG, "接收到obj2，地址是=%p", obj2);
+}
+
+void transObj3(BaseObject& obj3) {
+    BaseObject obj4("obj4");
+    LOGD_TWO(BASETAG, "创建临时对象 obj4，地址是=%p，obj3 地址是=%p", &obj4, &obj3);
+    obj3 = obj4;
+    LOGD_TWO(BASETAG, "将 obj4 传递给 obj3 后，obj3 地址是=%p，obj4 地址是=%p", &obj3, &obj4);
+    LOGD_TWO(BASETAG, "obj3=%s, obj4=%s", obj3.getName(), obj4.getName());
 }
