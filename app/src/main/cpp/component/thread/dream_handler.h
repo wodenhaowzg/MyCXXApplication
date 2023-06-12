@@ -10,17 +10,26 @@
 
 class dream_handler {
 
-
 public:
-    dream_handler(dream_looper *p_looper) {
-        mp_looper = p_looper;
+
+    dream_handler(){
+
     }
 
-    bool sendMessage(dream_message *p_message);
+    void setId(uint64_t id);
+
+    void SetLooper(dream_looper &p_looper);
+
+    uint64_t getId();
+
+    bool SendMessage(dream_message &p_message);
+
+    void onMessageReceived(dream_message &message) = 0;
 
 private:
 
-    dream_looper *mp_looper = nullptr;
+    uint64_t m_id;
+    dream_looper mp_looper;
 };
 
 

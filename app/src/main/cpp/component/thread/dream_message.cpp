@@ -3,3 +3,7 @@
 //
 
 #include "dream_message.h"
+
+uint64_t dream_message::GetHandlerId() {
+    return m_handler.getId();
+}
