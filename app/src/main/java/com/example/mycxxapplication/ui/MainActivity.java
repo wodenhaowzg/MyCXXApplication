@@ -36,7 +36,7 @@ public class MainActivity extends BaseActivity {
 //                SurfaceView surfaceView2 = findViewById(R.id.test_bytebuffer_surface2);
 //                SurfaceView[] surfaces = new SurfaceView[]{surfaceView1, surfaceView2};
 //                ByteBufferTest byteBufferTest = new ByteBufferTest(MainActivity.this);
-//                byteBufferTest.start(surfaces);
+//                byteBufferTest.Start(surfaces);
 //            }
 //        });
 

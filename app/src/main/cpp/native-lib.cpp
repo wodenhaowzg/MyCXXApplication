@@ -5,6 +5,7 @@
 #include "utils/TimeUtils.h"
 
 #include <sys/sysinfo.h>
+#include <thread>
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_MainActivity_testBase(JNIEnv *env, jobject thiz) {
 

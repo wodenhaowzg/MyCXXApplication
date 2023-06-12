@@ -19,7 +19,7 @@ public class ObjectTest implements TestInterface{
 //                }
 //                Log.e("WZGTEST", "OVER.....");
 //            }
-//        }).start();
+//        }).Start();
     }
 
     private native void structTest();

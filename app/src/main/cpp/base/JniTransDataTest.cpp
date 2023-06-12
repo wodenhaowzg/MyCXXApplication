@@ -61,6 +61,6 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_JNITransData
             return;
         }
         jboolean okBoolean = (jint) env->GetBooleanField(bean, okField);
-        LOGI("TransObject -> bean info, name = %s, age = %d, money = %lld, ok = %d", nameChar, ageInt, moneyLong, okBoolean);
+        LOGI("TransObject -> bean info, m_name = %s, age = %d, money = %lld, ok = %d", nameChar, ageInt, moneyLong, okBoolean);
     }
 }

@@ -21,11 +21,11 @@ public:
 
     BaseObject(const char* name){
         mName = name;
-//        LOGD_TWO("wzgtest", "Object Constructor! Address = %p, name = %s", this, name);
+//        LOGD_TWO("wzgtest", "Object Constructor! Address = %p, m_name = %s", this, m_name);
     }
 
     ~BaseObject(){
-//        LOGD_TWO("wzgtest", "Object Destructor! Address = %p, name = %s", this, mName);
+//        LOGD_TWO("wzgtest", "Object Destructor! Address = %p, m_name = %s", this, mName);
     }
 
     /**

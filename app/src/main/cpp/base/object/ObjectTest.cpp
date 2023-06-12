@@ -1,9 +1,12 @@
 //
 // Created by ZaneWang on 6/2/21.
 //
+#include <thread>
+#include <unistd.h>
 #include "BaseObject.h"
 #include "bean/Complex.h"
 #include "ObjectLifeTest.h"
+#include "vector"
 
 void transObject();
 
@@ -11,7 +14,7 @@ void transObj1(BaseObject object);
 
 void transObj2(BaseObject *pObject);
 
-void transObj3(BaseObject& obj3);
+void transObj3(BaseObject &obj3);
 
 void changeObject();
 
@@ -19,7 +22,11 @@ void baseOperator();
 
 void test1111(uint32_t aa, uint32_t &bb);
 
+void transObj4();
+
 uint32_t mtest = 0;
+std::vector<BaseObject> m_vector;
+
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ObjectTest_structTest(JNIEnv *env, jobject thiz) {
     // 1、对象的创建和释放。
@@ -58,6 +65,9 @@ void test1111(uint32_t aa, uint32_t &bb) {
     aa = 5;
 }
 
+#include "DreamLooper.h"
+#include "DreamHandlerTest.h"
+
 /**
  * 对象在方法之间传递时，引用传递会自动生成一个新的临时对象，指针传递则不会自动生成临时对象。
  */
@@ -65,13 +75,33 @@ void transObject() {
 //    BaseObject obj1("obj1");
 //    LOGD_TWO(BASETAG, "我是在栈空间上创建的obj1，地址是=%p", &obj1);
 //    transObj1(obj1);
+
 //    BaseObject *obj2 = new BaseObject("m_pObj");
 //    LOGD_TWO(BASETAG, "我是在堆空间上创建的obj2，地址是=%p", obj2);
 //    transObj2(obj2);
 //    delete obj2;
 
-    BaseObject obj3("obj3");
-    transObj3(obj3);
+//    BaseObject obj3("obj3");
+//    transObj3(obj3);
+
+//    transObj4();
+
+    DreamHandlerTest test;
+    test.StartTest();
+}
+
+void transObj4() {
+    // 在栈上创建一个局部变量
+    BaseObject obj4("obj4");
+    LOGD_TWO(BASETAG, "我是在栈上创建的 obj4，地址是=%p", &obj4);
+    // 放入全局集合中
+    m_vector.push_back(obj4);
+    std::thread thread([] {
+        usleep(1 * 1000);
+        BaseObject obj = m_vector.front();
+        LOGD_TWO(BASETAG, "从另一个线程从全局集合中读取 obj4，地址是=%p", &obj);
+    });
+    thread.join();
 }
 
 /**
@@ -119,7 +149,7 @@ void transObj2(BaseObject *obj2) {
     LOGD_TWO(BASETAG, "接收到obj2，地址是=%p", obj2);
 }
 
-void transObj3(BaseObject& obj3) {
+void transObj3(BaseObject &obj3) {
     BaseObject obj4("obj4");
     LOGD_TWO(BASETAG, "创建临时对象 obj4，地址是=%p，obj3 地址是=%p", &obj4, &obj3);
     obj3 = obj4;

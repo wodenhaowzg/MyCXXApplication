@@ -39,9 +39,9 @@ const char *BaseObject::getName() const {
 
 void transObject(BaseObject obj1, BaseObject &obj2) {
     LOGD_TWO(BASETAG, "Recv trans obj1 = %p, m_pObj = %p", &obj1, &obj2);
-    LOGD_TWO(BASETAG, " 000 global m_obj = %p, name = %s", &m_transObj, m_transObj.getName());
+    LOGD_TWO(BASETAG, " 000 global m_obj = %p, m_name = %s", &m_transObj, m_transObj.getName());
     m_transObj = obj2;
-    LOGD_TWO(BASETAG, "global m_obj = %p, name = %s", &m_transObj, m_transObj.getName());
+    LOGD_TWO(BASETAG, "global m_obj = %p, m_name = %s", &m_transObj, m_transObj.getName());
 }
 
 
