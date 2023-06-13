@@ -2,12 +2,12 @@
 // Created by ZaneWang on 2023/6/9.
 //
 
-#ifndef MYCXXAPPLICATION_DREAMMESSAGE_H
-#define MYCXXAPPLICATION_DREAMMESSAGE_H
+#ifndef MYCXXAPPLICATION_DREAM_MESSAGE_H
+#define MYCXXAPPLICATION_DREAM_MESSAGE_H
 
-#include "DreamLooper.h"
+#include "dream_looper.h"
 
-class DreamMessage : public std::enable_shared_from_this<DreamMessage>{
+class DreamMessage : public std::enable_shared_from_this<DreamMessage> {
 
 public:
     DreamMessage(uint32_t what = 0, DreamLooper::HandlerId target = 0);
@@ -45,7 +45,7 @@ public:
 
     bool FindPointer(const char *name, void **value) const;
 
-    void post(int64_t delayUs = 0);
+    void PostMessage(int64_t delayUs = 0);
 
 private:
     struct Item {
@@ -69,6 +69,10 @@ private:
     };
 
     /**
+     * 消息体中的参数数组
+     */
+    Item m_item_array[kMaxNumItems]{};
+    /**
      * 消息类型
      */
     uint32_t m_what_;
@@ -76,12 +80,14 @@ private:
      * 绑定的消息处理对象
      */
     DreamLooper::HandlerId m_target_handler_;
-    Item mItems[kMaxNumItems];
-    size_t mNumItems;
+    /**
+     * 消息体中参数数量
+     */
+    size_t m_item_num_;
 
     Item *allocateItem(const char *name);
 
-    void DreamMessage::freeItemValue(Item *item);
+    void freeItemValue(Item *item);
 
     const Item *findItem(const char *name, Type type) const;
 
@@ -92,4 +98,4 @@ private:
 };
 
 
-#endif //MYCXXAPPLICATION_DREAMMESSAGE_H
+#endif //MYCXXAPPLICATION_DREAM_MESSAGE_H

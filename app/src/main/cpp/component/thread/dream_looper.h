@@ -2,16 +2,19 @@
 // Created by ZaneWang on 2023/6/9.
 //
 
-#ifndef MYCXXAPPLICATION_DREAMLOOPER_H
-#define MYCXXAPPLICATION_DREAMLOOPER_H
+#ifndef MYCXXAPPLICATION_DREAM_LOOPER_H
+#define MYCXXAPPLICATION_DREAM_LOOPER_H
 
 #include <list>
 #include <map>
 #include <mutex>
 #include <iostream>
 #include <thread>
-#include "DreamMessage.h"
-#include "DreamHandler.h"
+#include "dream_base_utils.h"
+
+class DreamMessage;
+
+class DreamHandler;
 
 class DreamLooper : public std::enable_shared_from_this<DreamLooper> {
 
@@ -25,6 +28,10 @@ public:
 
     HandlerId RegisterHandler(const sp<DreamHandler> &handler);
 
+    void UnregisterHandler(const HandlerId handler_id);
+
+    void UnregisterHandlers();
+
     void Start();
 
     void Stop();
@@ -32,7 +39,6 @@ public:
     bool PostEvent(const sp<DreamMessage> &message);
 
 private:
-    typedef std::unique_lock<std::mutex> auto_lock;
 
     struct Event {
         int64_t when_us;
@@ -42,13 +48,13 @@ private:
     std::list<Event> m_event_list_;
     sp<std::thread> m_thread_ = nullptr;
     std::string m_thread_name_;
-    bool m_exit_;
+    bool m_exit_{};
 
     std::mutex m_lock_;
     std::condition_variable m_condition_;
 
-    void &loop();
+    void loop();
 };
 
 
-#endif //MYCXXAPPLICATION_DREAMLOOPER_H
+#endif //MYCXXAPPLICATION_DREAM_LOOPER_H

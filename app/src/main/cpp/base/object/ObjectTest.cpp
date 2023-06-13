@@ -65,9 +65,11 @@ void test1111(uint32_t aa, uint32_t &bb) {
     aa = 5;
 }
 
-#include "DreamLooper.h"
-#include "DreamHandlerTest.h"
+#include "dream_handler_test.h"
 
+
+
+std::shared_ptr<DreamHandlerTest> test;
 /**
  * 对象在方法之间传递时，引用传递会自动生成一个新的临时对象，指针传递则不会自动生成临时对象。
  */
@@ -86,8 +88,8 @@ void transObject() {
 
 //    transObj4();
 
-    DreamHandlerTest test;
-    test.StartTest();
+    test = std::make_shared<DreamHandlerTest>();
+    test->StartTest();
 }
 
 void transObj4() {

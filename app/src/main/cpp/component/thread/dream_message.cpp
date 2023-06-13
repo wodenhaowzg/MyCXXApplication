@@ -2,15 +2,15 @@
 // Created by ZaneWang on 2023/6/9.
 //
 
-#include "DreamMessage.h"
-#include "DreamLooperRoster.h"
+#include "dream_message.h"
+#include "dream_looper_roster.h"
 
 extern DreamLooperRoster g_looper_roster;
 
 DreamMessage::DreamMessage(uint32_t what, DreamLooper::HandlerId target)
         : m_what_(what),
           m_target_handler_(target),
-          mNumItems(0) {
+          m_item_num_(0) {
 }
 
 void DreamMessage::SetWhat(uint32_t what) {
@@ -60,13 +60,13 @@ DreamMessage::Item *DreamMessage::allocateItem(const char *name) {
     size_t len = strlen(name);
     size_t i = findItemIndex(name, len);
     Item *item;
-    if (i < mNumItems) {
-        item = &mItems[i];
+    if (i < m_item_num_) {
+        item = &m_item_array[i];
         freeItemValue(item);
     } else {
-        assert(mNumItems > kMaxNumItems);
-        i = mNumItems++;
-        item = &mItems[i];
+        assert(m_item_num_ <= kMaxNumItems);
+        i = m_item_num_++;
+        item = &m_item_array[i];
         item->setName(name, len);
     }
     return item;
@@ -77,8 +77,8 @@ void DreamMessage::freeItemValue(Item *item) {
 
 const DreamMessage::Item *DreamMessage::findItem(const char *name, Type type) const {
     size_t i = findItemIndex(name, strlen(name));
-    if (i < mNumItems) {
-        const Item *item = &mItems[i];
+    if (i < m_item_num_) {
+        const Item *item = &m_item_array[i];
         return item->m_type == type ? item : nullptr;
     }
     return nullptr;
@@ -86,12 +86,12 @@ const DreamMessage::Item *DreamMessage::findItem(const char *name, Type type) co
 
 inline size_t DreamMessage::findItemIndex(const char *name, size_t len) const {
     size_t i = 0;
-    for (; i < mNumItems; i++) {
-        if (len != mItems[i].m_name_length) {
+    for (; i < m_item_num_; i++) {
+        if (len != m_item_array[i].m_name_length) {
             continue;
         }
 
-        if (!memcmp(mItems[i].m_name, name, len)) {
+        if (!memcmp(m_item_array[i].m_name, name, len)) {
             break;
         }
     }
@@ -105,8 +105,8 @@ void DreamMessage::setObjectInternal(const char *name, const sp<T> &obj, Type ty
     item->u.ptrValue = obj.get();
 }
 
-void DreamMessage::post(int64_t delayUs) {
-    g_looper_roster.postMessage(shared_from_this(), delayUs);
+void DreamMessage::PostMessage(int64_t delayUs) {
+    g_looper_roster.PostMessage(shared_from_this(), delayUs);
 }
 
 void DreamMessage::Item::setName(const char *name, size_t len) {
