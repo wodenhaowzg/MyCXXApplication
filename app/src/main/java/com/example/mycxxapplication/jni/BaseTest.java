@@ -12,8 +12,11 @@ public class BaseTest implements TestInterface {
 
     @Override
     public void startTest() {
-        nativeStartTest();
+//        nativeStartTest();
+        nativeConstTest();
     }
 
     private native void nativeStartTest();
+
+    private native void nativeConstTest();
 }
