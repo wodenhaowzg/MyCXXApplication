@@ -58,18 +58,12 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ObjectTe
 //    delete m_pStringTest;
 }
 
-
 void test1111(uint32_t aa, uint32_t &bb) {
     LOGD_TWO(BASETAG, "============111 %p, %p", &aa, &bb);
     bb = 3;
     aa = 5;
 }
 
-#include "dream_handler_test.h"
-
-
-
-std::shared_ptr<DreamHandlerTest> test;
 /**
  * 对象在方法之间传递时，引用传递会自动生成一个新的临时对象，指针传递则不会自动生成临时对象。
  */
@@ -88,8 +82,14 @@ void transObject() {
 
 //    transObj4();
 
-    test = std::make_shared<DreamHandlerTest>();
-    test->StartTest();
+
+    std::shared_ptr<BaseObject> sp_obj = std::make_shared<BaseObject>();
+    LOGD_TWO(BASETAG, "obj=%p, obj_use=%p", sp_obj.get(), sp_obj.use_count());
+    std::shared_ptr<BaseObject> sp_obj2 = std::make_shared<BaseObject>();
+    LOGD_TWO(BASETAG, "obj=%p, obj_use=%p", sp_obj2.get(), sp_obj2.use_count());
+
+//    test = std::make_shared<DreamHandlerTest>();
+//    test->StartTest();
 }
 
 void transObj4() {

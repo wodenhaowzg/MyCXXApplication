@@ -17,6 +17,7 @@ android {
         // https://developer.android.com/reference/tools/gradle-api/4.1/com/android/build/api/dsl/ExternalNativeCmakeOptions
         externalNativeBuild {
             cmake {
+//                targets 'myapplication' // 生成静态库必须要加，名称和 cmake 里的 library 名一致
                 cppFlags "-std=c++11 -w -frtti -fexceptions"  // https://developer.android.com/ndk/guides/cpp-support?hl=zh-cn
             }
         }

@@ -19,6 +19,9 @@ private:
 
 public:
 
+    BaseObject(){
+    }
+
     BaseObject(const char* name){
         mName = name;
 //        LOGD_TWO("wzgtest", "Object Constructor! Address = %p, m_name = %s", this, m_name);

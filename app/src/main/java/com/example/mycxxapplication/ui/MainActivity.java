@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity {
 
     // Used to load the 'native-lib' library on application startup.
     static {
-        System.loadLibrary("native-lib");
+        System.loadLibrary("native_lib");
     }
 
     @Override
@@ -58,8 +58,13 @@ public class MainActivity extends BaseActivity {
 //        PointerTest pointerTest = new PointerTest(this);
 //        pointerTest.startTest();
 
-        ObjectTest objectTest = new ObjectTest();
-        objectTest.startTest();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ObjectTest objectTest = new ObjectTest();
+                objectTest.startTest();
+            }
+        }).start();
 
 //        ComponentTest componentTest = new ComponentTest();
 //        componentTest.startTest();
