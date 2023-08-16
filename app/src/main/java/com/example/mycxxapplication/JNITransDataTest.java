@@ -28,7 +28,15 @@ public class JNITransDataTest extends BaseTest {
 //        testObject();
         // 测试对象传递、数据解析是否存在内存泄露。
 //        testObjectArray();
-        testTransferByteArray();
+//        testTransferByteArray();
+
+        // 模拟 JNI 出现崩溃，测试 Java 层是否可以捕获
+        try {
+            String testStr = nativeSimulateJniError();
+            Log.e("testlog", testStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void testTransferByteArray() {
@@ -109,9 +117,10 @@ public class JNITransDataTest extends BaseTest {
      */
     private native void nativeTransferObjectToCXX(JNIDataBean[] beanArray);
 
+    private native String nativeSimulateJniError();
 
-    private void onDataReport(int data1) {
-        Log.d(TAG, "onDataReport -> " + data1);
+    private void onDataReport(String data) {
+        Log.d(TAG, "onDataReport -> " + data);
     }
 
     private static class JNIDataBean {

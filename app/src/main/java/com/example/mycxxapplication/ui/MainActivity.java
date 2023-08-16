@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
 
+import com.example.mycxxapplication.JNITransDataTest;
 import com.example.mycxxapplication.R;
 import com.example.mycxxapplication.databinding.ActivityMainBinding;
 import com.example.mycxxapplication.jni.ObjectTest;
@@ -58,18 +59,18 @@ public class MainActivity extends BaseActivity {
 //        PointerTest pointerTest = new PointerTest(this);
 //        pointerTest.startTest();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ObjectTest objectTest = new ObjectTest();
-                objectTest.startTest();
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                ObjectTest objectTest = new ObjectTest();
+//                objectTest.startTest();
+//            }
+//        }).start();
 
 //        ComponentTest componentTest = new ComponentTest();
 //        componentTest.startTest();
 
-//        JNITransDataTest jniTransDataTest = new JNITransDataTest(this);
-//        jniTransDataTest.startTest();
+        JNITransDataTest jniTransDataTest = new JNITransDataTest(this);
+        jniTransDataTest.startTest();
     }
 }

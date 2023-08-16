@@ -29,19 +29,15 @@ public class MemoryTest extends BaseTest {
         ByteBuffer byteBuffer = ByteBuffer.allocate(bitmap.getByteCount());
         bitmap.copyPixelsToBuffer(byteBuffer);
         mBitmapData = byteBuffer.array();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 1000; i++) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Log.d("wzgtest", "testFreeData...");
-                    testFreeData(mBitmapData, mBitmapData.length, mWidth, mHeight);
+        new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+                Log.d("wzgtest", "testFreeData...");
+                testFreeData(mBitmapData, mBitmapData.length, mWidth, mHeight);
             }
         }).start();
     }
