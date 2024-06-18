@@ -12,9 +12,9 @@ public class ComponentTest implements TestInterface {
     }
 
     private void testTimeComponent() {
-        LogUtils.logI("Java System.currentTimeMillis = " + System.currentTimeMillis());
-        LogUtils.logI("Java System.nanoTime = " + System.nanoTime());
-        LogUtils.logI("Java SystemClock.uptimeMillis = " + SystemClock.uptimeMillis());
+        LogUtils.logI("Java System.CurrentTimeMillis = " + System.currentTimeMillis());
+        LogUtils.logI("Java System.NanoTime = " + System.nanoTime());
+        LogUtils.logI("Java SystemClock.UptimeMillis = " + SystemClock.uptimeMillis());
         nativeTestTimeComponent();
     }
 

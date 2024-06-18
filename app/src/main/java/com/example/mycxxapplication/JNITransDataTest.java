@@ -47,7 +47,7 @@ public class JNITransDataTest extends BaseTest {
 //            while (true) {
 //                yuvDataTransfer.Start(srcByteArray, bitmap.getWidth(), bitmap.getHeight());
 //                try {
-//                    Thread.sleep(1000);
+//                    Thread.Sleep(1000);
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }

@@ -10,11 +10,11 @@
 class TimeUtils {
 
 public:
-    static long long currentTimeMillis();
+    static long long CurrentTimeMillis();
 
-    static long long nanoTime();
+    static long long NanoTime();
 
-    static long long uptimeMillis();
+    static long long UptimeMillis();
 };
 
 

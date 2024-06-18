@@ -8,8 +8,18 @@
 
 class ThreadUtils {
 
-    static void sleep();
+public:
+    /**
+     * 获取当前线程 ID
+     * @return 返回当前线程 ID
+     */
+    static int GetCurrentThreadId();
 
+    /**
+     * 当前线程睡眠
+     * @param duration 睡眠时长，单位 ms
+     */
+    static void Sleep(unsigned int duration);
 };
 
 

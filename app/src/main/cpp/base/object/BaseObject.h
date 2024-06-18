@@ -6,7 +6,7 @@
 #define MYCXXAPPLICATION_BASEOBJECT_H
 
 #include <jni.h>
-#include "../../Common.h"
+#include "utils/LogUtils.h"
 
 /**
  * 基类头文件

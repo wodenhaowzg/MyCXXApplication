@@ -10,7 +10,12 @@ import androidx.databinding.DataBindingUtil;
 import com.example.mycxxapplication.JNITransDataTest;
 import com.example.mycxxapplication.R;
 import com.example.mycxxapplication.databinding.ActivityMainBinding;
+import com.example.mycxxapplication.jni.BaseTest;
+import com.example.mycxxapplication.jni.DesignTestJni;
+import com.example.mycxxapplication.jni.LogTestJni;
+import com.example.mycxxapplication.jni.ModuleJniTest;
 import com.example.mycxxapplication.jni.ObjectTest;
+import com.example.mycxxapplication.jni.StringTestJni;
 import com.example.mycxxapplication.libyuv.LibYuvTest;
 
 public class MainActivity extends BaseActivity {
@@ -53,7 +58,7 @@ public class MainActivity extends BaseActivity {
 //        CollectionTe.starst collectionTest = new CollectionTest(this);
 //        collectionTesttTest();
 
-//        StringTest stringTest = new StringTest();
+//        StringTestJni stringTest = new StringTestJni();
 //        stringTest.startTest();
 
 //        PointerTest pointerTest = new PointerTest(this);
@@ -70,7 +75,16 @@ public class MainActivity extends BaseActivity {
 //        ComponentTest componentTest = new ComponentTest();
 //        componentTest.startTest();
 
-        JNITransDataTest jniTransDataTest = new JNITransDataTest(this);
-        jniTransDataTest.startTest();
+//        JNITransDataTest jniTransDataTest = new JNITransDataTest(this);
+//        jniTransDataTest.startTest();
+
+//        DesignTestJni designTestJni = new DesignTestJni(this);
+//        designTestJni.startTest();
+
+//        LogTestJni logTestJni = new LogTestJni(this);
+//        logTestJni.startTest();
+
+        ModuleJniTest moduleJniTest = new ModuleJniTest(this);
+        moduleJniTest.startTest();
     }
 }

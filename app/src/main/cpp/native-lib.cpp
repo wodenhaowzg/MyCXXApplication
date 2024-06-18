@@ -23,6 +23,6 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_MainActivity
      * 问题：对象函数传递，是引用传递还是值传递？
      * 答：默认是值传递，如果想引用传递，必须添加 & 符号。
      */
-    BaseObject obj("BaseObject");
-    obj.transTest();
+//    BaseObject obj("BaseObject");
+//    obj.transTest();
 }

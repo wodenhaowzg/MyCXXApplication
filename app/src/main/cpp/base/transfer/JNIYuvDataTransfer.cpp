@@ -1,6 +1,6 @@
 #include <jni.h>
 #include <cstring>
-#include "Common.h"
+#include "LogUtils.h"
 #include "JNIYuvDataTransfer.h"
 
 //

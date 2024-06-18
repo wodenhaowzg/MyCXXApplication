@@ -3,7 +3,7 @@
 //
 
 #include "ObjectLifeTest.h"
-#include "../../Common.h"
+#include "utils/LogUtils.h"
 
 class LocalObj {
 

@@ -9,7 +9,7 @@ public class ObjectTest implements TestInterface{
 //            @Override
 //            public void run() {
 //                try {
-//                    Thread.sleep(10* 000);
+//                    Thread.Sleep(10* 000);
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }

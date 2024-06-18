@@ -136,16 +136,16 @@ extern "C" JNIEXPORT jint JNICALL Java_com_example_mycxxapplication_libyuv_LibYu
     dest_u = dest_y + ySize;
     dest_v = dest_u + ySize / 4;
     // 做格式转换、裁剪和旋转
-    int transformResult = libyuv::ConvertToI420(p_srcByteArray, srcByteArraySize,
-                                                dest_y, rotateCropWidth,
-                                                dest_u, rotateCropWidth >> 1,
-                                                dest_v, rotateCropWidth >> 1,
-                                                cropX, cropY,
-                                                width, height,
-                                                cropWidth, cropHeight,
-                                                libYuvRotate, srcLibYuvFourcc);
+//    int transformResult = libyuv::ConvertToI420(p_srcByteArray, srcByteArraySize,
+//                                                dest_y, rotateCropWidth,
+//                                                dest_u, rotateCropWidth >> 1,
+//                                                dest_v, rotateCropWidth >> 1,
+//                                                cropX, cropY,
+//                                                width, height,
+//                                                cropWidth, cropHeight,
+//                                                libYuvRotate, srcLibYuvFourcc);
     // 做缩放和镜像
-    if (isNeedScaleMirror && transformResult == 0) {
+    if (isNeedScaleMirror) {
         if (rotateScaleWidth == 0 || rotateScaleHeight == 0) {
             rotateScaleWidth = rotateCropWidth;
             rotateScaleHeight = rotateCropHeight;
@@ -170,18 +170,18 @@ extern "C" JNIEXPORT jint JNICALL Java_com_example_mycxxapplication_libyuv_LibYu
         }
         dest_u = dest_y + ySize;
         dest_v = dest_u + ySize / 4;
-        int scaleMirrorResult = libyuv::I420Scale(src_y, rotateCropWidth,
-                                                  src_u, rotateCropWidth >> 1,
-                                                  src_v, rotateCropWidth >> 1,
-                                                  isMirror ? -rotateCropWidth : rotateCropWidth, rotateCropHeight,
-                                                  dest_y, rotateScaleWidth,
-                                                  dest_u, rotateScaleWidth >> 1,
-                                                  dest_v, rotateScaleWidth >> 1,
-                                                  rotateScaleWidth, rotateScaleHeight,
-                                                  libyuv::kFilterNone);
-        ret = scaleMirrorResult;
+//        int scaleMirrorResult = libyuv::I420Scale(src_y, rotateCropWidth,
+//                                                  src_u, rotateCropWidth >> 1,
+//                                                  src_v, rotateCropWidth >> 1,
+//                                                  isMirror ? -rotateCropWidth : rotateCropWidth, rotateCropHeight,
+//                                                  dest_y, rotateScaleWidth,
+//                                                  dest_u, rotateScaleWidth >> 1,
+//                                                  dest_v, rotateScaleWidth >> 1,
+//                                                  rotateScaleWidth, rotateScaleHeight,
+//                                                  libyuv::kFilterNone);
+//        ret = scaleMirrorResult;
     } else {
-        ret = transformResult;
+//        ret = transformResult;
     }
 
     // 如果目标格式不是 I420，则再从 I420 转换到目标格式
@@ -205,12 +205,12 @@ extern "C" JNIEXPORT jint JNICALL Java_com_example_mycxxapplication_libyuv_LibYu
         if (destLibYuvFourcc == libyuv::FOURCC_RGBA || destLibYuvFourcc == libyuv::FOURCC_ABGR || destLibYuvFourcc == libyuv::FOURCC_ARGB) {
             destSampleStride = destWidth * 4;
         }
-        ret = libyuv::ConvertFromI420(src_y, destWidth,
-                                      src_u, destWidth >> 1,
-                                      src_v, destWidth >> 1,
-                                      p_destByteArray, destSampleStride,
-                                      destWidth, destHeight,
-                                      destLibYuvFourcc);
+//        ret = libyuv::ConvertFromI420(src_y, destWidth,
+//                                      src_u, destWidth >> 1,
+//                                      src_v, destWidth >> 1,
+//                                      p_destByteArray, destSampleStride,
+//                                      destWidth, destHeight,
+//                                      destLibYuvFourcc);
     }
     // 释放 byteArray 数组
     if (srcPixelByteArrayObj != nullptr && p_srcByteArray != nullptr) {

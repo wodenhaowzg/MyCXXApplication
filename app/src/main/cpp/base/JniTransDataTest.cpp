@@ -6,7 +6,7 @@
 #include <malloc.h>
 #include <cstdint>
 #include <string>
-#include "Common.h"
+#include "LogUtils.h"
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_JNITransDataTest_nativeTransferObjectToCXX(JNIEnv *env, jobject thiz, jobjectArray array) {
     // Get array size.
