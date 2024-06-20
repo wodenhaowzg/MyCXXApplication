@@ -3,6 +3,7 @@
 //
 
 #include "OmniRtcEngine.h"
+#include "RtcGlobalVideo.h"
 
 OmniRtcEngine *OmniRtcEngine::g_instance = nullptr;
 std::mutex  OmniRtcEngine::g_instanceMutex;
@@ -104,4 +105,14 @@ void OmniRtcEngine::doDestroy() {
     }
     m_channelMap.clear();
     m_handler = nullptr;
+}
+
+int OmniRtcEngine::EnableLocalVideo(bool enabled) {
+    if (enabled == video_local_enabled_) {
+        return 0;
+    }
+    video_local_enabled_ = enabled;
+
+
+    return 0;
 }

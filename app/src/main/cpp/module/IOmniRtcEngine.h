@@ -174,6 +174,8 @@ public:
      * -5 ：传递的参数有问题，比如所设置的音频编码格式、码率大小、或声道数不支持。
      */
     virtual int setPreferAudioCodec(int codecType, int bitrate, int channels) = 0;
+
+    virtual int EnableLocalVideo(bool enabled) = 0;
 };
 
 #endif //CORERTCPROJECT_IOMNIRTCENGINE_H

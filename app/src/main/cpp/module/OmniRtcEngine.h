@@ -13,6 +13,14 @@
 
 class OmniRtcEngine : IOmniRtcEngine {
 
+
+public:
+    /**
+     * 本地视频是否启用
+     */
+    static bool video_local_enabled_;
+    const char* video_local_media_id_;
+
 private:
     static OmniRtcEngine *g_instance;
     static std::mutex g_instanceMutex;
@@ -20,7 +28,7 @@ private:
 
     OmniRtcEngineEventHandler *m_handler;
     RtcGlobalInfo m_rtcGlobalInfo;
-    std::map<const char*, OmniRtcChannel*> m_channelMap;
+    std::map<const char *, OmniRtcChannel *> m_channelMap;
 
     std::mutex m_rtcMutex;
 
@@ -40,7 +48,7 @@ public:
     void setHandler(OmniRtcEngineEventHandler *engineEventHandler) override;
 
     OmniRtcChannel *createRtcChannel(const char *channelName) override;
-    
+
     void destroyRtcChannel(const char *channelName) override;
 
     int setChannelProfile(int profile) override;
@@ -58,6 +66,8 @@ public:
     int setAudioProfile(int profile, int scenario) override;
 
     int setPreferAudioCodec(int codecType, int bitrate, int channels) override;
+
+    int EnableLocalVideo(bool enabled) override;
 
 private:
     void reinitialize(void *context, const char *appId, OmniRtcEngineEventHandler *handler);
