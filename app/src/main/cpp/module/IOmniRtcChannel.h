@@ -8,7 +8,6 @@
 #define CORERTCPROJECT_IOMNIRTCCHANNEL_H
 
 #include "IOmniRtcChannelEventHandler.h"
-#include <string>
 
 struct ChannelMediaOptions {
 
@@ -22,10 +21,9 @@ struct ChannelMediaOptions {
     bool autoSubscribeVideo = true;
 };
 
-class OmniRtcChannel {
-public:
-    virtual ~OmniRtcChannel() {}
+class IOmniRtcChannel {
 
+public:
     /**
      * 设置频道事件句柄。
      * <p/>
@@ -67,7 +65,7 @@ public:
      * <p/>
      * @return 返回 0 代表方法调用成功，返回其他数字代表调用失败。
      */
-    virtual int joinChannel(const std::string &token, long uid, const ChannelMediaOptions &options) = 0;
+    virtual int joinChannel(const char *token, long uid, const ChannelMediaOptions &options) = 0;
 
     /**
      * 离开当前频道。
@@ -87,7 +85,7 @@ public:
      * <p/>
      * @return 返回 0 代表方法调用成功，返回其他数字代表调用失败。
      */
-    virtual int renewToken(const std::string &token) = 0;
+    virtual int renewToken(const char *token) = 0;
 
     /**
      * 创建数据流
@@ -120,7 +118,7 @@ public:
      * <p/>
      * @return 返回频道的 Session ID
      */
-    virtual std::string getChannelSessionId() const = 0;
+    virtual const char *getChannelSessionId() const = 0;
 
     // ------------------------ 音频相关 -----------------------
 
@@ -149,7 +147,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual int muteLocalAudioStream(const std::string &mediaId, bool muted) = 0;
+    virtual int muteLocalAudioStream(const char *mediaId, bool muted) = 0;
 
     /**
      * 停止/恢复接收指定用户的音频流。
@@ -165,7 +163,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual int muteRemoteAudioStream(long uid, const std::string &mediaId, bool muted) = 0;
+    virtual int muteRemoteAudioStream(long uid, const char *mediaId, bool muted) = 0;
 
     /**
      * 停止/恢复接收所有音频流。
@@ -213,7 +211,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，其他代表失败。<br/>
      */
-    virtual int muteLocalVideoStream(const std::string &mediaId, bool muted) = 0;
+    virtual int muteLocalVideoStream(const char *mediaId, bool muted) = 0;
 
     /**
      * 停止/恢复接收指定用户的视频流。
@@ -230,7 +228,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，其他代表失败。<br/>
      */
-    virtual int muteRemoteVideoStream(long uid, const std::string &mediaId, bool muted) = 0;
+    virtual int muteRemoteVideoStream(long uid, const char *mediaId, bool muted) = 0;
 
     /**
      * 停止/恢复接收所有视频流。

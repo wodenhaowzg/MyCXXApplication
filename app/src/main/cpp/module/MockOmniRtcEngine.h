@@ -9,8 +9,6 @@
 
 #include "IOmniRtcEngine.h"
 
-class MockOmniRtcEngine {
+class MockOmniRtcEngine {};
 
-};
-
-#endif //CORERTCPROJECT_MOCKOMNIRTCENGINE_H
+#endif // CORERTCPROJECT_MOCKOMNIRTCENGINE_H

@@ -15,8 +15,6 @@
 class OmniRtcChannelEventHandler {
 
 public:
-    virtual ~OmniRtcChannelEventHandler() {}
-
     /**
      * 加入频道成功回调
      * <p/>

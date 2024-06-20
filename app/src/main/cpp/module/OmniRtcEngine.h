@@ -5,12 +5,11 @@
 #ifndef MYCXXAPPLICATION_OMNIRTCENGINE_H
 #define MYCXXAPPLICATION_OMNIRTCENGINE_H
 
+#include <map>
 #include <mutex>
-#include <memory>
-#include <string>
-#include <android/log.h>
 
 #include "IOmniRtcEngine.h"
+#include "RtcEngineDefines.h"
 
 class OmniRtcEngine : IOmniRtcEngine {
 
@@ -19,82 +18,51 @@ private:
     static std::mutex g_instanceMutex;
     static const char *kLOG_TAG;
 
-    OmniRtcEngine(void *context, const std::string &appId, OmniRtcEngineEventHandler *handler) {
-        __android_log_print(ANDROID_LOG_INFO, kLOG_TAG, "The OmniRtcEngine created. address: %p", this);
+    OmniRtcEngineEventHandler *m_handler;
+    RtcGlobalInfo m_rtcGlobalInfo;
+    std::map<const char*, OmniRtcChannel*> m_channelMap;
+
+    std::mutex m_rtcMutex;
+
+    OmniRtcEngine(void *context, const char *appId, OmniRtcEngineEventHandler *handler) {
+        m_handler = handler;
+        m_rtcGlobalInfo.appId = appId;
     }
 
-    ~OmniRtcEngine(void *context, const std::string &appId, OmniRtcEngineEventHandler *handler) {
-        __android_log_print(ANDROID_LOG_INFO, kLOG_TAG, "The OmniRtcEngine destroyed. address: %p", this);
+    ~OmniRtcEngine() {
     }
 
 public:
-    static OmniRtcEngine *create(void *context, const std::string &appId, OmniRtcEngineEventHandler *handler) {
-//        if (context == nullptr) {
-//            return nullptr;
-//        }
-        std::lock_guard<std::mutex> lock(g_instanceMutex);
-        if (g_instance == nullptr) {
-            g_instance = new OmniRtcEngine(context, appId, handler);
-        } else {
-            g_instance->reinitialize(context, appId, handler);
-        }
-        return g_instance;
-    }
+    static IOmniRtcEngine *create(void *context, const char *appId, OmniRtcEngineEventHandler *handler);
 
-    static destroy() {
-        std::lock_guard<std::mutex> lock(g_instanceMutex);
-        __android_log_print(ANDROID_LOG_INFO, kLOG_TAG, "destroy -> address: %p", this);
-        delete g_instance;
-    }
+    static void destroy();
 
-    void setHandler(OmniRtcEngineEventHandler *engineEventHandler) override {
+    void setHandler(OmniRtcEngineEventHandler *engineEventHandler) override;
 
-    }
+    OmniRtcChannel *createRtcChannel(const char *channelName) override;
+    
+    void destroyRtcChannel(const char *channelName) override;
 
-    OmniRtcChannel *createRtcChannel(const std::string &channelName) override {
-        return nullptr;
-    }
+    int setChannelProfile(int profile) override;
 
-    int setChannelProfile(int profile) override {
-        __android_log_print(ANDROID_LOG_INFO, kLOG_TAG, "setChannelProfile -> profile: %d", profile);
-        return 0;
-    }
+    void setServerIp(const char *ip, int port) override;
 
-    void setServerIp(const std::string &ip, int port) override {
+    int setBusinessUserRole(int role) override;
 
-    }
+    int setSlbAddress(const char *slb, const char *slbBackup) override;
 
-    int setBusinessUserRole(int role) override {
-        return 0;
-    }
+    int setServerLogAddress(const char *serverLogUrl) override;
 
-    int setSlbAddress(const std::string &slb, const std::string &slbBackup) override {
-        return 0;
-    }
+    int setAppExtensionInfo(const char *jsonInfo) override;
 
-    int setServerLogAddress(const std::string &serverLogUrl) override {
-        return 0;
-    }
+    int setAudioProfile(int profile, int scenario) override;
 
-    int setAppExtensionInfo(const std::string &jsonInfo) override {
-        return 0;
-    }
-
-    int setAudioProfile(int profile, int scenario) override {
-        return 0;
-    }
-
-    int setPreferAudioCodec(int codecType, int bitrate, int channels) override {
-        return 0;
-    }
+    int setPreferAudioCodec(int codecType, int bitrate, int channels) override;
 
 private:
+    void reinitialize(void *context, const char *appId, OmniRtcEngineEventHandler *handler);
 
-    void reinitialize(void *context, const std::string &appId, OmniRtcEngineEventHandler *handler) override {
-
-    }
-
-    void logI(const char *message, ...);
+    void doDestroy();
 };
 
 #endif //MYCXXAPPLICATION_OMNIRTCENGINE_H

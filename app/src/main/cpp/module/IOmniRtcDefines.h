@@ -5,9 +5,7 @@
 #ifndef MYCXXAPPLICATION_IOMNIRTCDEFINES_H
 #define MYCXXAPPLICATION_IOMNIRTCDEFINES_H
 
-
-typedef struct AudioVolumeInfo {
-
+struct AudioVolumeInfo {
     /**
      * 用户所属的频道名称。
      */
@@ -25,9 +23,9 @@ typedef struct AudioVolumeInfo {
      */
     int volume;
     int vad; // 未用到
-} AudioVolumeInfo;
+};
 
-typedef struct LocalAudioStats {
+struct LocalAudioStats {
     /**
         * 用户 ID。
         */
@@ -68,11 +66,10 @@ typedef struct LocalAudioStats {
      * 音量值。
      */
     int volume;
+};
 
-} LocalAudioStats;
-
-typedef struct LocalVideoStats {
-/**
+struct LocalVideoStats {
+    /**
      * 用户 ID。
      */
     long long uid;
@@ -120,11 +117,9 @@ typedef struct LocalVideoStats {
      * 视频上行 rtt
      */
     int rtt;
+};
 
-} LocalVideoStats;
-
-typedef struct RemoteAudioStats {
-
+struct RemoteAudioStats {
     /**
      * 用户所属的频道名称。
      */
@@ -181,10 +176,9 @@ typedef struct RemoteAudioStats {
      * rtt ms
      */
     int rtt;
-} RemoteAudioStats;
+};
 
-typedef struct RemoteVideoStats {
-
+struct RemoteVideoStats {
     /**
      * 用户所属的频道名称。
      */
@@ -245,10 +239,9 @@ typedef struct RemoteVideoStats {
      * rtt(ms)
      */
     int rtt;
-} RemoteVideoStats;
+};
 
-typedef struct RtcStats {
-
+struct RtcStats {
     /**
      * 频道名称
      */
@@ -333,6 +326,6 @@ typedef struct RtcStats {
      * 当前系统的 CPU 使用率 (%)，自 Android 8.1 起，因系统限制，你无法通过该属性获取 CPU 使用率。
      */
     double cpuTotalUsage;
-} RtcStats;
+};
 
 #endif //MYCXXAPPLICATION_IOMNIRTCDEFINES_H
