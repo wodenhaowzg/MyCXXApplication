@@ -3,9 +3,10 @@
 //
 
 #include "RtcGlobalChannel.h"
+#include "OmniRtcEngine.h"
 
 bool RtcGlobalChannel::IsJoinedChannel() {
-    return is_joined_channel_;
+    return OmniRtcEngine::GetInstance()->IsJoinedChannel();
 }
 
 long long RtcGlobalChannel::GetOwnerId() {
@@ -14,8 +15,4 @@ long long RtcGlobalChannel::GetOwnerId() {
 
 void RtcGlobalChannel::SetOwnerId(long long int owner_id) {
     owner_id_ = owner_id;
-}
-
-void RtcGlobalChannel::SetIsJoinedChannel(bool is_joined_channel) {
-    is_joined_channel_ = is_joined_channel;
 }

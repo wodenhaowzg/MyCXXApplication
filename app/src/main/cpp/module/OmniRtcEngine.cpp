@@ -120,11 +120,19 @@ int OmniRtcEngine::EnableLocalVideo(std::string &media_id, bool enabled) {
     return 0;
 }
 
+OmniRtcEngine *OmniRtcEngine::GetInstance() {
+    return (OmniRtcEngine *) g_instance;
+}
+
+bool OmniRtcEngine::IsJoinedChannel() {
+    return false;
+}
+
 void OmniRtcEngine::Initialize(void *context, std::string &appId, OmniRtcEngineEventHandler *handler) {
     m_handler_ = handler;
     global_holder_ = RtcGlobalHolder::GetInstance();
-    channel_manager_ = global_holder_->getChannelManager();
-    video_manager_ = global_holder_->getVideoManager();
+    channel_manager_ = global_holder_->getGlobalChannel();
+    video_manager_ = global_holder_->getGlobalVideo();
     global_holder_->SetAppId(appId);
 }
 

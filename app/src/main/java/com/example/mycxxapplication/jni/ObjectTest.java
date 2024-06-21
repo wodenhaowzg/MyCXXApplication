@@ -4,7 +4,8 @@ public class ObjectTest implements TestInterface{
 
     @Override
     public void startTest() {
-        structTest();
+//        structTest();
+        stringTest("22");
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {

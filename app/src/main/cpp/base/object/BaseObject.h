@@ -36,7 +36,7 @@ public:
      */
     virtual void toString();
 
-    /**
+     /**
      * 非虚方法。
      */
     void hashCode();

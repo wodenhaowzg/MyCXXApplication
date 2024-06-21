@@ -71,6 +71,8 @@ public class MainActivity extends BaseActivity {
 //                objectTest.startTest();
 //            }
 //        }).start();
+//        ObjectTest objectTest = new ObjectTest();
+//        objectTest.startTest();
 
 //        ComponentTest componentTest = new ComponentTest();
 //        componentTest.startTest();

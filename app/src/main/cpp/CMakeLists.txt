@@ -29,6 +29,7 @@ include_directories(${SOURCE_DIR}/design)
 include_directories(${SOURCE_DIR}/thread)
 include_directories(${SOURCE_DIR}/thread/handler)
 include_directories(${SOURCE_DIR}/module)
+include_directories(${SOURCE_DIR}/module/GlobalHolder)
 
 aux_source_directory(${SOURCE_DIR} SOURCE_FILE)
 aux_source_directory(${SOURCE_DIR}/base SOURCE_FILE)
@@ -46,6 +47,7 @@ aux_source_directory(${SOURCE_DIR}/design SOURCE_FILE)
 aux_source_directory(${SOURCE_DIR}/thread SOURCE_FILE)
 aux_source_directory(${SOURCE_DIR}/thread/handler SOURCE_FILE)
 aux_source_directory(${SOURCE_DIR}/module SOURCE_FILE)
+aux_source_directory(${SOURCE_DIR}/module/GlobalHolder SOURCE_FILE)
 
 #libyuv
 include_directories(${THIRD_PARTY_DIR}/libyuv/include)

@@ -3,3 +3,7 @@
 //
 
 #include "RtcGlobalAudio.h"
+
+std::string RtcGlobalAudio::GetAudioUplinkMediaId() {
+    return "";
+}

@@ -6,6 +6,8 @@
 #define MYCXXAPPLICATION_CHILDOBJECT_H
 
 #include "BaseObject.h"
+#include <string>
+#include <vector>
 
 /**
  * C++ 继承，有三种继承方式(JAVA不存在)，默认是 private 方式继承。
@@ -17,10 +19,11 @@
  */
 class ChildObject : protected BaseObject {
 
+private:
+    std::vector<std::string> m_string_list;
+
 public:
-
     ChildObject(const char *name) : BaseObject(name) {
-
     }
 
     /**
@@ -32,6 +35,10 @@ public:
      * 重写父类非虚方法
      */
     void hashCode();
+
+    std::string& getString();
+
+    void addString(std::string &text);
 };
 
 #endif //MYCXXAPPLICATION_CHILDOBJECT_H

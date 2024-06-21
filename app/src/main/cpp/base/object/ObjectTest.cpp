@@ -7,6 +7,7 @@
 #include "bean/Complex.h"
 #include "ObjectLifeTest.h"
 #include "vector"
+#include "ChildObject.h"
 
 void transObject();
 
@@ -23,6 +24,8 @@ void baseOperator();
 void test1111(uint32_t aa, uint32_t &bb);
 
 void transObj4();
+
+void addString(ChildObject *pObject);
 
 uint32_t mtest = 0;
 std::vector<BaseObject> m_vector;
@@ -49,13 +52,27 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ObjectTe
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ObjectTest_stringTest(JNIEnv *env, jobject thiz, jstring str) {
     // 测试字符串转移
 //    m_pStringTest = new StringTest();
-    const char *localStr = env->GetStringUTFChars(str, nullptr);
+//    const char *localStr = env->GetStringUTFChars(str, nullptr);
 //    LOGD_TWO(BASETAG, "获取到字符串，地址 = %p", &localStr);
 //    m_pStringTest->m_string = localStr;
 //    LOGD_TWO(BASETAG, "字符串已转移到 StringTest 对象上，检查是否存在 = %s，地址 = %p", m_pStringTest->m_string, &m_pStringTest->m_string);
-    env->ReleaseStringUTFChars(str, localStr);
+//    env->ReleaseStringUTFChars(str, localStr);
 //    LOGD_TWO(BASETAG, "字符串已转移到 StringTest 对象上，检查是否存在 = %s，地址 = %p", m_pStringTest->m_string, &m_pStringTest->m_string);
 //    delete m_pStringTest;
+
+
+    //
+    ChildObject *obj = new ChildObject("2");
+    LOGI("address0: obj: %p", obj);
+    addString(obj);
+    std::string get_text = obj->getString();
+    LOGI("address2: %p, obj: %p", &get_text, obj);
+}
+
+void addString(ChildObject *obj) {
+    std::string s("222");
+    LOGI("address: %p, obj: %p", &s, obj);
+    obj->addString(s);
 }
 
 void test1111(uint32_t aa, uint32_t &bb) {

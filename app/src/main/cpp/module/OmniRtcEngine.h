@@ -22,9 +22,13 @@ private:
     }
 
 public:
+    /****************************************** 面向上层调用 *************************************************/
+
     static IOmniRtcEngine *Create(void *context, std::string &app_id, OmniRtcEngineEventHandler *handler);
 
     static void Destroy();
+
+    /****************************************** 继承 IOmniRtcEngine *************************************************/
 
     void SetHandler(OmniRtcEngineEventHandler *engine_handler) override;
 
@@ -49,6 +53,12 @@ public:
     int SetPreferAudioCodec(int codec_type, int bitrate, int channels) override;
 
     int EnableLocalVideo(std::string &media_id, bool enabled) override;
+
+    /****************************************** 自定义方法 *************************************************/
+
+    static OmniRtcEngine *GetInstance();
+
+    bool IsJoinedChannel();
 
 private:
     static OmniRtcEngine *g_instance;
