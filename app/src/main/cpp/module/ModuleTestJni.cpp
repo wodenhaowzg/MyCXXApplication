@@ -148,20 +148,23 @@ public:
 
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ModuleJniTest_nativeStartTest(JNIEnv *env, jobject thiz) {
     LocalOmniRtcEngineEventHandler handler;
-    IOmniRtcEngine *rtcEngine = IOmniRtcEngine::Create(nullptr, "sss", &handler);
+    std::string appid("sss");
+    IOmniRtcEngine *rtcEngine = IOmniRtcEngine::Create(nullptr, appid, &handler);
 //    rtcEngine->SetChannelProfile(2);
 //    LocalOmniRtcChannelEventHandler channelEventHandler;
 //    OmniRtcChannel *channel = rtcEngine->CreateRtcChannel("333");
 //    channel->setRtcChannelEventHandler(&channelEventHandler);
 //    IOmniRtcEngine::Destroy();
 
-    OmniRtcChannel *rtcChannel = rtcEngine->CreateRtcChannel("111");
-    OmniRtcChannel *rtcChannel2 = rtcEngine->CreateRtcChannel("222");
-    OmniRtcChannel *rtcChannel3 = rtcEngine->CreateRtcChannel("333");
+    std::string channelName1("111");
+    std::string channelName2("111");
+    std::string channelName3("111");
+    OmniRtcChannel *rtcChannel = rtcEngine->CreateRtcChannel(channelName1);
+    OmniRtcChannel *rtcChannel2 = rtcEngine->CreateRtcChannel(channelName2);
+    OmniRtcChannel *rtcChannel3 = rtcEngine->CreateRtcChannel(channelName3);
 
-    rtcEngine->DestroyRtcChannel("111");
-    rtcEngine->DestroyRtcChannel("222");
-    rtcEngine->DestroyRtcChannel("333");
-    rtcEngine->DestroyRtcChannel("444");
+    rtcEngine->DestroyRtcChannel(channelName1);
+    rtcEngine->DestroyRtcChannel(channelName2);
+    rtcEngine->DestroyRtcChannel(channelName3);
 
 }

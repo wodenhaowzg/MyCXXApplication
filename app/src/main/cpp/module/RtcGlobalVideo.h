@@ -5,19 +5,25 @@
 #ifndef MYCXXAPPLICATION_RTCGLOBALVIDEO_H
 #define MYCXXAPPLICATION_RTCGLOBALVIDEO_H
 
-#include "OmniRtcEngine.h"
+#include <string>
+#include "RtcGlobalChannel.h"
 
 class RtcGlobalVideo {
 
 public:
-    std::string getVideoUplinkMediaId();
+    std::string GetVideoUplinkMediaId();
 
-    void setVideoUplinkMediaId(std::string &mediaId);
+    void SetRtcGlobalChannel(RtcGlobalChannel &channel);
+
+    bool SetLocalEnabled(bool enabled);
+
+    void SetVideoUplinkMediaId(std::string &mediaId);
 
 private:
-    OmniRtcEngine* rtc_engine_;
+    RtcGlobalChannel channel_manager_;
     std::string video_uplink_media_id_;
     std::string video_default_uplink_media_id_;
+    bool video_local_enabled_;
 };
 
 #endif //MYCXXAPPLICATION_RTCGLOBALVIDEO_H

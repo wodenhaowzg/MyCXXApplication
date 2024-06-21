@@ -21,16 +21,4 @@ enum RtcChannelProfile {
     CHANNEL_PROFILE_GAME_FREE_MODE = 2
 };
 
-struct RtcGlobalInfo {
-
-    /**
-     * APP ID
-     */
-    const char *appId = "";
-    /**
-     * 频道模式
-     */
-    int channelProfile = CHANNEL_PROFILE_LIVE_BROADCASTING;
-};
-
 #endif //MYCXXAPPLICATION_RTCENGINEDEFINES_H

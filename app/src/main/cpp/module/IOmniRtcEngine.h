@@ -25,12 +25,12 @@ public:
      * 2.SDK 引擎同一时间只能持有一个 App ID。 如果 App 内存在多个 App ID，则需要再次调用 Create 来切换 App ID ，此操作并不会再次创建一个新的实例对象。
      *
      * @param context 安卓APP(Android Application) 的上下文，而不是 Activity 的上下文。
-     * @param appId   OMNI 为 App 开发者签发的 APP ID 。
+     * @param app_id   OMNI 为 App 开发者签发的 APP ID 。
      * @param handler OmniRtcEngineEventHandler 是一个提供了缺省实现的抽象类，SDK 通过该抽象类向 App 报告 SDK 运行时的各种事件。
      *                <p/>
      * @return OmniRtcEngine SDK 引擎对象。
      */
-    static IOmniRtcEngine *Create(void *context, const char *appId, OmniRtcEngineEventHandler *handler);
+    static IOmniRtcEngine *Create(void *context, std::string &app_id, OmniRtcEngineEventHandler *handler);
 
     /**
      * SDK 引擎的反初始化。
@@ -44,20 +44,20 @@ public:
      * <p/>
      * 接口类的所有方法都有缺省（空）实现，app 可以根据需要只继承关心的事件。在回调方法中，app 不应该做耗时或者调用可能会引起阻塞的 API（如 sendStreamMessage），否则可能影响 SDK 的运行。
      *
-     * @param engineEventHandler 待添加的回调事件。
+     * @param engine_handler 待添加的回调事件。
      */
-    virtual void SetHandler(OmniRtcEngineEventHandler *engineEventHandler) = 0;
+    virtual void SetHandler(OmniRtcEngineEventHandler *engine_handler) = 0;
 
     /**
      * 创建并获取一个 RtcChannel 对象。
      *
-     * @param channelName 能标识频道的频道名，现只支持 64 字节的数值型字符串。
+     * @param channel_name 能标识频道的频道名，现只支持 64 字节的数值型字符串。
      *                    <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual OmniRtcChannel *CreateRtcChannel(const char *channelName) = 0;
+    virtual OmniRtcChannel *CreateRtcChannel(std::string &channel_name) = 0;
 
-    virtual void DestroyRtcChannel(const char *channelName) = 0;
+    virtual void DestroyRtcChannel(std::string &channel_name) = 0;
 
     //    virtual OmniAudioModule *getOmniAudioModule() = 0;
 
@@ -103,7 +103,7 @@ public:
      * @param ip   服务器的 IP 地址。
      * @param port 服务器的 IP 地址所对应的端口号。
      */
-    virtual void SetServerIp(const char *ip, int port) = 0;
+    virtual void SetServerIp(std::string &ip, int port) = 0;
 
     /**
      * 设置业务用户身份。
@@ -118,28 +118,28 @@ public:
      * 设置 slb 地址。
      *
      * @param slb       slb 地址。
-     * @param slbBackup slb 备用地址。
+     * @param slb_backup slb 备用地址。
      *                  <p/>
      * @return 0 代表方法调用成功，其他代表失败
      */
-    virtual int SetSlbAddress(const char *slb, const char *slbBackup) = 0;
+    virtual int SetSlbAddress(std::string &slb, std::string &slb_backup) = 0;
 
     /**
      * 设置 C++ 日志上传到服务器的地址。
      *
-     * @param serverLogUrl 服务器地址。
+     * @param server_url 服务器地址。
      *                     <p/>
      * @return 0 代表方法调用成功，其他代表失败
      */
-    virtual int SetServerLogAddress(const char *serverLogUrl) = 0;
+    virtual int SetServerLogAddress(std::string &server_url) = 0;
 
     /**
      * 设置业务直播形式
      *
-     * @param jsonInfo 包含 livemode(业务直播模式) 和 planid(业务场景ID ) 两个子参数，参数示例 {"livemode":1,"planid":"1010"}
+     * @param json 包含 livemode(业务直播模式) 和 planid(业务场景ID ) 两个子参数，参数示例 {"livemode":1,"planid":"1010"}
      * @return 0 代表方法调用成功，其他代表失败
      */
-    virtual int SetAppExtensionInfo(const char *jsonInfo) = 0;
+    virtual int SetAppExtensionInfo(std::string &json) = 0;
 
     /**
      * 设置音频编码配置。
@@ -175,7 +175,7 @@ public:
      */
     virtual int SetPreferAudioCodec(int codecType, int bitrate, int channels) = 0;
 
-    virtual int EnableLocalVideo(const char* mediaId, bool enabled) = 0;
+    virtual int EnableLocalVideo(std::string &mediaId, bool enabled) = 0;
 };
 
 #endif //CORERTCPROJECT_IOMNIRTCENGINE_H
