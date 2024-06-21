@@ -22,7 +22,7 @@ public:
      * <p/>
      * 使用注意：<br/>
      * 1.同一个 APP ID 才能进入同一个频道实现通话或直播，不同的APP ID 无法实现互通。<br/>
-     * 2.SDK 引擎同一时间只能持有一个 App ID。 如果 App 内存在多个 App ID，则需要再次调用 create 来切换 App ID ，此操作并不会再次创建一个新的实例对象。
+     * 2.SDK 引擎同一时间只能持有一个 App ID。 如果 App 内存在多个 App ID，则需要再次调用 Create 来切换 App ID ，此操作并不会再次创建一个新的实例对象。
      *
      * @param context 安卓APP(Android Application) 的上下文，而不是 Activity 的上下文。
      * @param appId   OMNI 为 App 开发者签发的 APP ID 。
@@ -30,12 +30,12 @@ public:
      *                <p/>
      * @return OmniRtcEngine SDK 引擎对象。
      */
-    static IOmniRtcEngine *create(void *context, const char *appId, OmniRtcEngineEventHandler *handler);
+    static IOmniRtcEngine *Create(void *context, const char *appId, OmniRtcEngineEventHandler *handler);
 
     /**
      * SDK 引擎的反初始化。
      */
-    static void destroy();
+    static void Destroy();
 
     /**
      * 设置主回调事件。
@@ -46,7 +46,7 @@ public:
      *
      * @param engineEventHandler 待添加的回调事件。
      */
-    virtual void setHandler(OmniRtcEngineEventHandler *engineEventHandler) = 0;
+    virtual void SetHandler(OmniRtcEngineEventHandler *engineEventHandler) = 0;
 
     /**
      * 创建并获取一个 RtcChannel 对象。
@@ -55,9 +55,9 @@ public:
      *                    <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual OmniRtcChannel *createRtcChannel(const char *channelName) = 0;
+    virtual OmniRtcChannel *CreateRtcChannel(const char *channelName) = 0;
 
-    virtual void destroyRtcChannel(const char *channelName) = 0;
+    virtual void DestroyRtcChannel(const char *channelName) = 0;
 
     //    virtual OmniAudioModule *getOmniAudioModule() = 0;
 
@@ -93,7 +93,7 @@ public:
      *                <p/>
      * @return 0 代表方法调用成功，其他代表失败。<br/>
      */
-    virtual int setChannelProfile(int profile) = 0;
+    virtual int SetChannelProfile(int profile) = 0;
 
     /**
      * 设置服务器地址
@@ -103,7 +103,7 @@ public:
      * @param ip   服务器的 IP 地址。
      * @param port 服务器的 IP 地址所对应的端口号。
      */
-    virtual void setServerIp(const char *ip, int port) = 0;
+    virtual void SetServerIp(const char *ip, int port) = 0;
 
     /**
      * 设置业务用户身份。
@@ -112,7 +112,7 @@ public:
      *             <p/>
      * @return 0 代表方法调用成功，其他代表失败
      */
-    virtual int setBusinessUserRole(int role) = 0;
+    virtual int SetBusinessUserRole(int role) = 0;
 
     /**
      * 设置 slb 地址。
@@ -122,7 +122,7 @@ public:
      *                  <p/>
      * @return 0 代表方法调用成功，其他代表失败
      */
-    virtual int setSlbAddress(const char *slb, const char *slbBackup) = 0;
+    virtual int SetSlbAddress(const char *slb, const char *slbBackup) = 0;
 
     /**
      * 设置 C++ 日志上传到服务器的地址。
@@ -131,7 +131,7 @@ public:
      *                     <p/>
      * @return 0 代表方法调用成功，其他代表失败
      */
-    virtual int setServerLogAddress(const char *serverLogUrl) = 0;
+    virtual int SetServerLogAddress(const char *serverLogUrl) = 0;
 
     /**
      * 设置业务直播形式
@@ -139,7 +139,7 @@ public:
      * @param jsonInfo 包含 livemode(业务直播模式) 和 planid(业务场景ID ) 两个子参数，参数示例 {"livemode":1,"planid":"1010"}
      * @return 0 代表方法调用成功，其他代表失败
      */
-    virtual int setAppExtensionInfo(const char *jsonInfo) = 0;
+    virtual int SetAppExtensionInfo(const char *jsonInfo) = 0;
 
     /**
      * 设置音频编码配置。
@@ -153,7 +153,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual int setAudioProfile(int profile, int scenario) = 0;
+    virtual int SetAudioProfile(int profile, int scenario) = 0;
 
     /**
      * 设置音频编码参数。
@@ -173,9 +173,9 @@ public:
      * -4 ：已加入频道，调用会失败。<br/>
      * -5 ：传递的参数有问题，比如所设置的音频编码格式、码率大小、或声道数不支持。
      */
-    virtual int setPreferAudioCodec(int codecType, int bitrate, int channels) = 0;
+    virtual int SetPreferAudioCodec(int codecType, int bitrate, int channels) = 0;
 
-    virtual int EnableLocalVideo(bool enabled) = 0;
+    virtual int EnableLocalVideo(const char* mediaId, bool enabled) = 0;
 };
 
 #endif //CORERTCPROJECT_IOMNIRTCENGINE_H

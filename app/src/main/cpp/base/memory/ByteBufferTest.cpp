@@ -29,7 +29,7 @@ jboolean renderYuvDecodedFrame(JNIEnv *env, jobject thiz, unsigned char *yuvFram
     ANativeWindow_Buffer buffer;
     ANativeWindow *window = ANativeWindow_fromSurface(env, surface);
     if (window == nullptr) {
-//        LOGE("test", "create ANativeWindow failed!");
+//        LOGE("test", "Create ANativeWindow failed!");
         return static_cast<jboolean>(false);
     }
     ANativeWindow_setBuffersGeometry(window, width, height, WINDOW_FORMAT_RGBA_8888);

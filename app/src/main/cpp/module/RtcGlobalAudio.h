@@ -1,0 +1,14 @@
+//
+// Created by ZaneWang on 2024/6/20.
+//
+
+#ifndef MYCXXAPPLICATION_RTCGLOBALAUDIO_H
+#define MYCXXAPPLICATION_RTCGLOBALAUDIO_H
+
+
+class RtcGlobalAudio {
+
+};
+
+
+#endif //MYCXXAPPLICATION_RTCGLOBALAUDIO_H
