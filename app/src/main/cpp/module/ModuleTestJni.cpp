@@ -5,7 +5,6 @@
 #include <jni.h>
 #include <android/log.h>
 #include "OmniRtcEngine.h"
-#include "OmniRtcChannel.h"
 
 class LocalOmniRtcEngineEventHandler : public OmniRtcEngineEventHandler {
 
@@ -151,7 +150,7 @@ void createRtcChannel(std::string basicString);
 extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ModuleJniTest_nativeStartTest(JNIEnv *env, jobject thiz) {
     LocalOmniRtcEngineEventHandler handler;
     std::string appid("sss");
-    IOmniRtcEngine *rtcEngine = IOmniRtcEngine::Create(nullptr, appid, &handler);
+//    IOmniRtcEngine *rtcEngine = IOmniRtcEngine::Create(nullptr, appid, &handler);
 //    rtcEngine->SetChannelProfile(2);
 //    LocalOmniRtcChannelEventHandler channelEventHandler;
 //    OmniRtcChannel *channel = rtcEngine->CreateRtcChannel("333");
@@ -162,6 +161,8 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ModuleJn
     std::string channelName2("111");
     std::string channelName3("111");
 
+//    RtcGlobalChannel c = RtcGlobalHolder::GetInstance()->getGlobalChannel();
+//    __android_log_print(ANDROID_LOG_INFO, "wzgtest", "c: %p, %p", c, RtcGlobalHolder::GetInstance()->getGlobalChannel());
 
 //    OmniRtcChannel *rtcChannel = rtcEngine->CreateRtcChannel(channelName1);
 //    OmniRtcChannel *rtcChannel2 = rtcEngine->CreateRtcChannel(channelName2);

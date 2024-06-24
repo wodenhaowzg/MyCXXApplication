@@ -8,17 +8,18 @@
 #define CORERTCPROJECT_IOMNIRTCCHANNEL_H
 
 #include "IOmniRtcChannelEventHandler.h"
+#include "RtcEngineDefines.h"
 
 struct ChannelMediaOptions {
 
     /**
      * 设置是否自动订阅所有音频流：true：自动订阅所有音频流。false：不自动订阅任何音频流。
      */
-    bool autoSubscribeAudio = true;
+    bool auto_subscribe_audio = true;
     /**
      * 设置是否自动订阅所有视频流：true：自动订阅所有视频流。false：不自动订阅任何视频流。
      */
-    bool autoSubscribeVideo = true;
+    bool auto_subscribe_video = true;
 };
 
 class IOmniRtcChannel {
@@ -31,13 +32,13 @@ public:
      *
      * @param eventHandler RtcChannel 对象的事件回调句柄。
      */
-    virtual void setRtcChannelEventHandler(OmniRtcChannelEventHandler *eventHandler) = 0;
+    virtual void SetRtcChannelEventHandler(OmniRtcChannelEventHandler *handler) = 0;
 
     /**
      * 获取频道事件句柄。
      * @return 返回频道事件句柄。
      */
-    virtual OmniRtcChannelEventHandler *getEventHandler() const = 0;
+    virtual OmniRtcChannelEventHandler *GetEventHandler() const = 0;
 
     /**
      * 设置用户角色。
@@ -48,7 +49,7 @@ public:
      * <p/>
      * @return 返回 0 代表方法调用成功，返回其他数字代表调用失败。
      */
-    virtual int setClientRole(int role) = 0;
+    virtual RtcStatus SetClientRole(RtcClientRole role) = 0;
 
     /**
      * 加入频道。
@@ -65,7 +66,7 @@ public:
      * <p/>
      * @return 返回 0 代表方法调用成功，返回其他数字代表调用失败。
      */
-    virtual int joinChannel(const char *token, long uid, const ChannelMediaOptions &options) = 0;
+    virtual RtcStatus JoinChannel(std::string token, int64_t uid, const ChannelMediaOptions &options) = 0;
 
     /**
      * 离开当前频道。
@@ -74,7 +75,7 @@ public:
      *
      * @return 返回 0 代表方法调用成功，返回其他数字代表调用失败。
      */
-    virtual int leaveChannel() = 0;
+    virtual RtcStatus LeaveChannel() = 0;
 
     /**
      * 更新 Token。
@@ -85,7 +86,7 @@ public:
      * <p/>
      * @return 返回 0 代表方法调用成功，返回其他数字代表调用失败。
      */
-    virtual int renewToken(const char *token) = 0;
+    virtual RtcStatus RenewToken(std::string token) = 0;
 
     /**
      * 创建数据流
@@ -99,7 +100,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，其他代表失败。
      */
-    virtual int createDataStream(bool reliable, bool ordered) = 0;
+    virtual RtcStatus CreateDataStream(bool reliable, bool ordered) = 0;
 
     /**
      * 发送自定义数据流
@@ -111,14 +112,14 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，其他代表失败。
      */
-    virtual int sendStreamMessage(int streamId, const std::vector<unsigned char> &message) = 0;
+    virtual RtcStatus SendStreamMessage(int stream_id, const std::vector<unsigned char> &message) = 0;
 
     /**
      * 获取频道的 Session ID
      * <p/>
      * @return 返回频道的 Session ID
      */
-    virtual const char *getChannelSessionId() const = 0;
+    virtual std::string GetChannelSessionId() const = 0;
 
     // ------------------------ 音频相关 -----------------------
 
@@ -131,7 +132,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，其他代表失败。
      */
-    virtual int setDefaultMuteAllRemoteAudioStreams(bool muted) = 0;
+    virtual RtcStatus SetDefaultMuteAllRemoteAudioStreams(bool muted) = 0;
 
     /**
      * 停止/恢复发送本地音频流。
@@ -147,7 +148,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual int muteLocalAudioStream(const char *mediaId, bool muted) = 0;
+    virtual RtcStatus MuteLocalAudioStream(std::string media_id, bool muted) = 0;
 
     /**
      * 停止/恢复接收指定用户的音频流。
@@ -163,7 +164,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual int muteRemoteAudioStream(long uid, const char *mediaId, bool muted) = 0;
+    virtual RtcStatus MuteRemoteAudioStream(int64_t uid, std::string media_id, bool muted) = 0;
 
     /**
      * 停止/恢复接收所有音频流。
@@ -177,7 +178,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual int muteAllRemoteAudioStreams(bool muted) = 0;
+    virtual RtcStatus MuteAllRemoteAudioStreams(bool muted) = 0;
 
     // ------------------------ 视频相关 -----------------------
 
@@ -195,7 +196,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual int setDefaultMuteAllRemoteVideoStreams(bool muted) = 0;
+    virtual RtcStatus SetDefaultMuteAllRemoteVideoStreams(bool muted) = 0;
 
     /**
      * 停止/恢复发送本地视频流。
@@ -211,7 +212,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，其他代表失败。<br/>
      */
-    virtual int muteLocalVideoStream(const char *mediaId, bool muted) = 0;
+    virtual RtcStatus MuteLocalVideoStream(std::string media_id, bool muted) = 0;
 
     /**
      * 停止/恢复接收指定用户的视频流。
@@ -228,7 +229,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，其他代表失败。<br/>
      */
-    virtual int muteRemoteVideoStream(long uid, const char *mediaId, bool muted) = 0;
+    virtual RtcStatus MuteRemoteVideoStream(int64_t uid, std::string media_id, bool muted) = 0;
 
     /**
      * 停止/恢复接收所有视频流。
@@ -242,7 +243,23 @@ public:
      *              <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual int muteAllRemoteVideoStreams(bool muted) = 0;
+    virtual RtcStatus MuteAllRemoteVideoStreams(bool muted) = 0;
+
+    /**
+     * 设置订阅的视频流类型。
+     * <p/>
+     * 如果发送端选择发送视频双流（大流或小流），接收端可以选择接收大流还是小流。其中大流可以理解为高分辨率高码率的视频流，小流则是低分辨率低码率的视频流。视频小流的分辨率默认为视频大流的一半。
+     * <p/>
+     * 使用注意：<br/>
+     * 1.如果发送端用户未启用双流模式，SDK 默认接收大流。
+     *
+     * @param uid        指定的远端用户 ID。<br/>
+     * @param media_id    指定的远端用户视频流 ID。<br/>
+     * @param stream_type 设置视频流大小。视频流类型如下：1、VIDEO_STREAM_HIGH，视频大流，即高分辨率、高码率视频流。2、VIDEO_STREAM_LOW，视频小流，即低分辨率、低码率视频流。
+     *                   <p/>
+     * @return 返回 0 代表方法调用成功，返回其他数字代表调用失败。
+     */
+    virtual RtcStatus SetRemoteVideoStreamType(int64_t uid, std::string media_id, VideoStreamType stream_type) = 0;
 };
 
 #endif // CORERTCPROJECT_IOMNIRTCCHANNEL_H

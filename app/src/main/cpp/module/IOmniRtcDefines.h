@@ -5,6 +5,66 @@
 #ifndef MYCXXAPPLICATION_IOMNIRTCDEFINES_H
 #define MYCXXAPPLICATION_IOMNIRTCDEFINES_H
 
+enum RtcChannelProfile {
+
+    /**
+     * 通信频道模式,申请发言服务器自动同意
+     */
+    CHANNEL_PROFILE_COMMUNICATION = 0,
+    /**
+     * 直播频道模式,申请发言主播需同意
+     */
+    CHANNEL_PROFILE_LIVE_BROADCASTING = 1,
+    /**
+     * 游戏频道模式
+     */
+    CHANNEL_PROFILE_GAME_FREE_MODE = 2
+};
+
+enum RtcClientRole {
+
+    /**
+     * 主播角色
+     */
+    CLIENT_ROLE_BROADCASTER = 1,
+    /**
+     * 观众角色
+     */
+    CLIENT_ROLE_AUDIENCE = 2
+};
+
+enum BusinessRole {
+
+    /**
+     * 学生。
+     */
+    BUSINESS_ROLE_STUDENT = 0,
+    /**
+     * 老师。
+     */
+    BUSINESS_ROLE_TEACHER = 1,
+    /**
+     * 辅导老师。
+     */
+    BUSINESS_ROLE_ASSISTANT = 2,
+};
+
+enum VideoStreamType {
+
+    /**
+     * 视频大流，即高分辨率高码率的视频流。
+     */
+    VIDEO_STREAM_HIGH = 0,
+    /**
+     * 视频小流，即低分辨率低码率的视频流。
+     */
+    VIDEO_STREAM_LOW = 1,
+    /**
+     * 回退到音频流。
+     */
+    VIDEO_STREAM_AUDIO = 2,
+};
+
 struct AudioVolumeInfo {
     /**
      * 用户所属的频道名称。
@@ -27,8 +87,8 @@ struct AudioVolumeInfo {
 
 struct LocalAudioStats {
     /**
-        * 用户 ID。
-        */
+     * 用户 ID。
+     */
     long long uid;
     /**
      * 用户的音频流 ID。
@@ -328,4 +388,4 @@ struct RtcStats {
     double cpuTotalUsage;
 };
 
-#endif //MYCXXAPPLICATION_IOMNIRTCDEFINES_H
+#endif // MYCXXAPPLICATION_IOMNIRTCDEFINES_H

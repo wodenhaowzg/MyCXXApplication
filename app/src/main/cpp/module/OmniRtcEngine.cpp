@@ -4,13 +4,16 @@
 
 #include <string>
 #include "OmniRtcEngine.h"
-#include "RtcGlobalVideo.h"
+#include "../GlobalHolder/RtcGlobalVideo.h"
+#include "RtcChannelManager.h"
+#include "RtcEngineDefines.h"
+#include "TTTRtcClientCore.h"
 
 OmniRtcEngine *OmniRtcEngine::g_instance = nullptr;
 std::mutex  OmniRtcEngine::g_instanceMutex;
 const char *OmniRtcEngine::LOG_TAG = "wzgtest";
 
-IOmniRtcEngine *IOmniRtcEngine::Create(void *context, std::string &app_id, OmniRtcEngineEventHandler *handler) {
+IOmniRtcEngine *IOmniRtcEngine::Create(void *context, const char *app_id, OmniRtcEngineEventHandler *handler) {
     return OmniRtcEngine::Create(context, app_id, handler);
 }
 
@@ -18,8 +21,14 @@ void IOmniRtcEngine::Destroy() {
     OmniRtcEngine::Destroy();
 }
 
-IOmniRtcEngine *OmniRtcEngine::Create(void *context, std::string &app_id, OmniRtcEngineEventHandler *handler) {
-    // TODO 增加参数 context、app_id 有效性判断
+IOmniRtcEngine *OmniRtcEngine::Create(void *context, const char *app_id, OmniRtcEngineEventHandler *handler) {
+    if (context == nullptr) {
+        return nullptr;
+    }
+    std::string app_id_str(app_id);
+    if (app_id_str.empty()) {
+        return nullptr;
+    }
     std::lock_guard<std::mutex> lock(OmniRtcEngine::g_instanceMutex);
     if (g_instance == nullptr) {
         g_instance = new OmniRtcEngine();
@@ -40,114 +49,100 @@ void OmniRtcEngine::Destroy() {
 }
 
 void OmniRtcEngine::SetHandler(OmniRtcEngineEventHandler *engine_handler) {
-//    std::lock_guard<std::mutex> lock(m_rtcMutex);
     m_handler_ = engine_handler;
 }
 
-OmniRtcChannel *OmniRtcEngine::CreateRtcChannel(std::string &channel_name) {
-    const char *c_channel_name = channel_name.c_str();
-    OmniRtcChannel *rtcChannel = channel_map_[c_channel_name];
-    if (rtcChannel == nullptr) {
-        rtcChannel = new OmniRtcChannel();
-        channel_map_[c_channel_name] = rtcChannel;
-    }
-    return rtcChannel;
+IOmniRtcChannel *OmniRtcEngine::CreateRtcChannel(const char *channel_name) {
+    return channel_manager_->CreateRtcChannel(channel_name);
 }
 
-void OmniRtcEngine::DestroyRtcChannel(std::string &channel_name) {
-    const char *c_channel_name = channel_name.c_str();
-    OmniRtcChannel *rtcChannel = channel_map_.find(c_channel_name)->second;
-    delete rtcChannel;
-    channel_map_.erase(c_channel_name);
+void OmniRtcEngine::DestroyRtcChannel(const char *channel_name) {
+    channel_manager_->DestroyRtcChannel(channel_name);
 }
 
-int OmniRtcEngine::SetChannelProfile(int profile) {
-    return 0;
+RtcStatus OmniRtcEngine::SetChannelProfile(RtcChannelProfile profile) {
+    RtcGlobalHolder::GetInstance()->SetChannelProfile(profile);
+    return FUNCTION_SUCCESS;
 }
 
-void OmniRtcEngine::SetServerIp(std::string &ip, int port) {
-
+void OmniRtcEngine::SetServerIp(const char *ip, int port) {
+    TTTRtc::IClientCore::getInstance()->setServerAddress(ip, port);
 }
 
-int OmniRtcEngine::SetBusinessUserRole(int role) {
-    return 0;
+RtcStatus OmniRtcEngine::SetBusinessUserRole(BusinessRole role) {
+    int ret = TTTRtc::IClientCore::getInstance()->setBusinessUserRole(role);
+    return ret == 0 ? FUNCTION_SUCCESS : ERROR_FUNCTION_ERROR_FAILED;
 }
 
-int OmniRtcEngine::SetSlbAddress(std::string &slb, std::string &slb_backup) {
-    return 0;
+void OmniRtcEngine::SetSlbAddress(const char *slb, const char *slb_backup) {
+    TTTRtc::IClientCore::getInstance()->SetSlbAddress(slb, slb_backup);
 }
 
-int OmniRtcEngine::SetServerLogAddress(std::string &server_url) {
-    return 0;
+void OmniRtcEngine::SetServerLogAddress(const char* server_url) {
+//    TTTRtc::IClientCore::getInstance()-> // IClientCore 未实现接口
 }
 
-int OmniRtcEngine::SetAppExtensionInfo(std::string &json) {
-    return 0;
+RtcStatus OmniRtcEngine::SetAppExtensionInfo(const char* json) {
+    int ret = TTTRtc::IClientCore::getInstance()->setAppExtensionInfo(json);
+    return ret == 0 ? FUNCTION_SUCCESS : ERROR_FUNCTION_ERROR_FAILED;
 }
 
-int OmniRtcEngine::SetAudioProfile(int profile, int scenario) {
-    return 0;
+RtcStatus OmniRtcEngine::SetAudioProfile(int profile, int scenario) {
+    return FUNCTION_SUCCESS;
 }
 
-int OmniRtcEngine::SetPreferAudioCodec(int codec_type, int bitrate, int channels) {
-    return 0;
+RtcStatus OmniRtcEngine::SetPreferAudioCodec(int codec_type, int bitrate, int channels) {
+    int ret = TTTRtc::IClientCore::getInstance()->SetPreferAudioCodec(codec_type, bitrate, channels);
+    return ret == 0 ? FUNCTION_SUCCESS : ERROR_FUNCTION_ERROR_FAILED;
 }
 
-int OmniRtcEngine::EnableLocalVideo(std::string &media_id, bool enabled) {
+RtcStatus OmniRtcEngine::EnableLocalVideo(const char* media_id, bool enabled) {
+    std::string src_mediaId_string(media_id);
     std::string mediaId_string;
     // 更新视频上行流 ID
-    if (media_id.empty()) {
-        mediaId_string = video_manager_.GetVideoUplinkMediaId();
+    if (src_mediaId_string.empty()) {
+        mediaId_string = video_manager_->GetVideoUplinkMediaId();
     } else {
-        video_manager_.SetVideoUplinkMediaId(mediaId_string);
+        video_manager_->SetVideoUplinkMediaId(mediaId_string);
     }
-    bool is_set_success = video_manager_.SetLocalEnabled(enabled);
+    bool is_set_success = video_manager_->SetLocalEnabled(enabled);
     if (!is_set_success) {
         // 接口重复调用，终止流程
-        return 0;
+        return FUNCTION_SUCCESS;
     }
     // 启用/停止视频采集
     // TODO IOmniVideo.EnableLocalVideo
     // 若未加入频道，终止流程
-    bool is_joined = channel_manager_.IsJoinedChannel();
+    bool is_joined = channel_manager_->IsJoinedChannel();
     if (!is_joined) {
-        return 0;
+        return FUNCTION_SUCCESS;
     }
     // 更新视频设备 xml 信息
     // TODO VideoJni.getInstance().EnableVideoDev(media_id, enabled ? 1 : 0);
     // 上报 onLocalVideoStateChanged 回调状态变更
     // TODO onLocalVideoStateChanged
-    return 0;
+    return FUNCTION_SUCCESS;
 }
 
 OmniRtcEngine *OmniRtcEngine::GetInstance() {
     return (OmniRtcEngine *) g_instance;
 }
 
-bool OmniRtcEngine::IsJoinedChannel() {
-    return false;
-}
-
-void OmniRtcEngine::Initialize(void *context, std::string &appId, OmniRtcEngineEventHandler *handler) {
+void OmniRtcEngine::Initialize(void *context, const char* app_id, OmniRtcEngineEventHandler *handler) {
     m_handler_ = handler;
     global_holder_ = RtcGlobalHolder::GetInstance();
     channel_manager_ = global_holder_->getGlobalChannel();
     video_manager_ = global_holder_->getGlobalVideo();
-    global_holder_->SetAppId(appId);
+    global_holder_->SetAppId(app_id);
+    TTTRtc::IClientCore::getInstance()->initialize(client_core_context_);
 }
 
-void OmniRtcEngine::Reinitialize(void *context, std::string &appId, OmniRtcEngineEventHandler *handler) {
+void OmniRtcEngine::Reinitialize(void *context, const char* app_id, OmniRtcEngineEventHandler *handler) {
     m_handler_ = handler;
-    global_holder_->SetAppId(appId);
+    global_holder_->SetAppId(app_id);
 }
 
 void OmniRtcEngine::DoDestroy() {
-    auto iterator = channel_map_.begin();
-    while (iterator != channel_map_.end()) {
-        OmniRtcChannel *rtcChannel = iterator->second;
-        delete rtcChannel;
-        iterator++;
-    }
-    channel_map_.clear();
+    channel_manager_->destroy();
     m_handler_ = nullptr;
 }

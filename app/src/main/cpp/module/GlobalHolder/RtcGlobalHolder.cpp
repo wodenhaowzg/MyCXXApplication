@@ -12,24 +12,32 @@ RtcGlobalHolder *RtcGlobalHolder::GetInstance() {
     return instance_;
 }
 
-std::string RtcGlobalHolder::GetAppId() const {
+const std::string &RtcGlobalHolder::GetAppId() const {
     return app_id_;
 }
 
-const RtcGlobalChannel &RtcGlobalHolder::getGlobalChannel() {
-    return global_channel_;
+RtcGlobalChannel *RtcGlobalHolder::getGlobalChannel() {
+    return &global_channel_;
 }
 
-const RtcGlobalAudio &RtcGlobalHolder::getGlobalAudio() {
-    return global_audio_;
+RtcGlobalAudio *RtcGlobalHolder::getGlobalAudio() {
+    return &global_audio_;
 }
 
-const RtcGlobalVideo &RtcGlobalHolder::getGlobalVideo() {
-    return global_video_;
+RtcGlobalVideo *RtcGlobalHolder::getGlobalVideo() {
+    return &global_video_;
+}
+
+RTCEngine::AVStreamPublishHandler &RtcGlobalHolder::getAVStreamPublishHandler() {
+    return global_publish_handler_;
 }
 
 void RtcGlobalHolder::SetAppId(const std::string &app_id) {
     app_id_ = app_id;
+}
+
+void RtcGlobalHolder::SetChannelProfile(RtcChannelProfile &profile) {
+    channel_profile_ = profile;
 }
 
 void RtcGlobalHolder::initSingleton() {

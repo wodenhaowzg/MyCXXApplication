@@ -8,7 +8,8 @@
 #define CORERTCPROJECT_IOMNIRTCENGINE_H
 
 #include "IOmniRtcEngineEventHandler.h"
-#include "OmniRtcChannel.h"
+#include "IOmniRtcChannel.h"
+#include "RtcEngineDefines.h"
 
 class IOmniRtcEngine {
 
@@ -30,7 +31,7 @@ public:
      *                <p/>
      * @return OmniRtcEngine SDK 引擎对象。
      */
-    static IOmniRtcEngine *Create(void *context, std::string &app_id, OmniRtcEngineEventHandler *handler);
+    static IOmniRtcEngine *Create(void *context, const char *app_id, OmniRtcEngineEventHandler *handler);
 
     /**
      * SDK 引擎的反初始化。
@@ -55,9 +56,9 @@ public:
      *                    <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual OmniRtcChannel *CreateRtcChannel(std::string &channel_name) = 0;
+    virtual IOmniRtcChannel *CreateRtcChannel(const char *channel_name) = 0;
 
-    virtual void DestroyRtcChannel(std::string &channel_name) = 0;
+    virtual void DestroyRtcChannel(const char *channel_name) = 0;
 
     //    virtual OmniAudioModule *getOmniAudioModule() = 0;
 
@@ -93,7 +94,7 @@ public:
      *                <p/>
      * @return 0 代表方法调用成功，其他代表失败。<br/>
      */
-    virtual int SetChannelProfile(int profile) = 0;
+    virtual RtcStatus SetChannelProfile(RtcChannelProfile profile) = 0;
 
     /**
      * 设置服务器地址
@@ -103,7 +104,7 @@ public:
      * @param ip   服务器的 IP 地址。
      * @param port 服务器的 IP 地址所对应的端口号。
      */
-    virtual void SetServerIp(std::string &ip, int port) = 0;
+    virtual void SetServerIp(const char *ip, int port) = 0;
 
     /**
      * 设置业务用户身份。
@@ -112,7 +113,7 @@ public:
      *             <p/>
      * @return 0 代表方法调用成功，其他代表失败
      */
-    virtual int SetBusinessUserRole(int role) = 0;
+    virtual RtcStatus SetBusinessUserRole(BusinessRole role) = 0;
 
     /**
      * 设置 slb 地址。
@@ -122,7 +123,7 @@ public:
      *                  <p/>
      * @return 0 代表方法调用成功，其他代表失败
      */
-    virtual int SetSlbAddress(std::string &slb, std::string &slb_backup) = 0;
+    virtual void SetSlbAddress(const char *slb, const char *slb_backup) = 0;
 
     /**
      * 设置 C++ 日志上传到服务器的地址。
@@ -131,7 +132,7 @@ public:
      *                     <p/>
      * @return 0 代表方法调用成功，其他代表失败
      */
-    virtual int SetServerLogAddress(std::string &server_url) = 0;
+    virtual void SetServerLogAddress(const char *server_url) = 0;
 
     /**
      * 设置业务直播形式
@@ -139,7 +140,7 @@ public:
      * @param json 包含 livemode(业务直播模式) 和 planid(业务场景ID ) 两个子参数，参数示例 {"livemode":1,"planid":"1010"}
      * @return 0 代表方法调用成功，其他代表失败
      */
-    virtual int SetAppExtensionInfo(std::string &json) = 0;
+    virtual RtcStatus SetAppExtensionInfo(const char *json) = 0;
 
     /**
      * 设置音频编码配置。
@@ -153,7 +154,7 @@ public:
      * <p/>
      * @return 0 代表方法调用成功，暂无错误返回。
      */
-    virtual int SetAudioProfile(int profile, int scenario) = 0;
+    virtual RtcStatus SetAudioProfile(int profile, int scenario) = 0;
 
     /**
      * 设置音频编码参数。
@@ -173,9 +174,9 @@ public:
      * -4 ：已加入频道，调用会失败。<br/>
      * -5 ：传递的参数有问题，比如所设置的音频编码格式、码率大小、或声道数不支持。
      */
-    virtual int SetPreferAudioCodec(int codecType, int bitrate, int channels) = 0;
+    virtual RtcStatus SetPreferAudioCodec(int codec_type, int bitrate, int channels) = 0;
 
-    virtual int EnableLocalVideo(std::string &mediaId, bool enabled) = 0;
+    virtual RtcStatus EnableLocalVideo(const char *media_id, bool enabled) = 0;
 };
 
-#endif //CORERTCPROJECT_IOMNIRTCENGINE_H
+#endif // CORERTCPROJECT_IOMNIRTCENGINE_H

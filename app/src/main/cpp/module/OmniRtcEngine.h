@@ -8,9 +8,12 @@
 #include <map>
 #include <mutex>
 
+#include "IOmniRtcDefines.h"
 #include "IOmniRtcEngine.h"
+#include "RtcChannelManager.h"
+#include "../GlobalHolder/RtcGlobalHolder.h"
 #include "RtcEngineDefines.h"
-#include "RtcGlobalHolder.h"
+#include "TTTRtcClientCore.h"
 
 class OmniRtcEngine : IOmniRtcEngine {
 
@@ -24,7 +27,7 @@ private:
 public:
     /****************************************** 面向上层调用 *************************************************/
 
-    static IOmniRtcEngine *Create(void *context, std::string &app_id, OmniRtcEngineEventHandler *handler);
+    static IOmniRtcEngine *Create(void *context, const char *app_id, OmniRtcEngineEventHandler *handler);
 
     static void Destroy();
 
@@ -32,33 +35,31 @@ public:
 
     void SetHandler(OmniRtcEngineEventHandler *engine_handler) override;
 
-    OmniRtcChannel *CreateRtcChannel(std::string &channel_name) override;
+    IOmniRtcChannel *CreateRtcChannel(const char *channel_name) override;
 
-    void DestroyRtcChannel(std::string &channel_name) override;
+    void DestroyRtcChannel(const char *channel_name) override;
 
-    int SetChannelProfile(int profile) override;
+    RtcStatus SetChannelProfile(RtcChannelProfile profile) override;
 
-    void SetServerIp(std::string &ip, int port) override;
+    void SetServerIp(const char *ip, int port) override;
 
-    int SetBusinessUserRole(int role) override;
+    RtcStatus SetBusinessUserRole(BusinessRole role) override;
 
-    int SetSlbAddress(std::string &slb, std::string &slb_backup) override;
+    void SetSlbAddress(const char *slb, const char *slb_backup) override;
 
-    int SetServerLogAddress(std::string &server_url) override;
+    void SetServerLogAddress(const char *server_url) override;
 
-    int SetAppExtensionInfo(std::string &json) override;
+    RtcStatus SetAppExtensionInfo(const char *json) override;
 
-    int SetAudioProfile(int profile, int scenario) override;
+    RtcStatus SetAudioProfile(int profile, int scenario) override;
 
-    int SetPreferAudioCodec(int codec_type, int bitrate, int channels) override;
+    RtcStatus SetPreferAudioCodec(int codec_type, int bitrate, int channels) override;
 
-    int EnableLocalVideo(std::string &media_id, bool enabled) override;
+    RtcStatus EnableLocalVideo(const char *media_id, bool enabled) override;
 
     /****************************************** 自定义方法 *************************************************/
 
     static OmniRtcEngine *GetInstance();
-
-    bool IsJoinedChannel();
 
 private:
     static OmniRtcEngine *g_instance;
@@ -67,16 +68,16 @@ private:
 
     OmniRtcEngineEventHandler *m_handler_;
     RtcGlobalHolder *global_holder_;
-    RtcGlobalChannel channel_manager_;
-    RtcGlobalVideo video_manager_;
-    std::map<const char *, OmniRtcChannel *> channel_map_;
+    RtcGlobalChannel* channel_manager_;
+    RtcGlobalVideo* video_manager_;
+    TTTRtc::ClientCoreContext client_core_context_;
     std::mutex m_rtcMutex;
 
-    void Initialize(void *context, std::string &appId, OmniRtcEngineEventHandler *handler);
+    void Initialize(void *context, const char * app_id, OmniRtcEngineEventHandler *handler);
 
-    void Reinitialize(void *context, std::string &appId, OmniRtcEngineEventHandler *handler);
+    void Reinitialize(void *context, const char * app_id, OmniRtcEngineEventHandler *handler);
 
     void DoDestroy();
 };
 
-#endif //MYCXXAPPLICATION_OMNIRTCENGINE_H
+#endif // MYCXXAPPLICATION_OMNIRTCENGINE_H
