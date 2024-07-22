@@ -16,6 +16,7 @@ import com.example.mycxxapplication.jni.LogTestJni;
 import com.example.mycxxapplication.jni.ModuleJniTest;
 import com.example.mycxxapplication.jni.ObjectTest;
 import com.example.mycxxapplication.jni.StringTestJni;
+import com.example.mycxxapplication.jni.ThreadTest;
 import com.example.mycxxapplication.libyuv.LibYuvTest;
 
 public class MainActivity extends BaseActivity {
@@ -86,7 +87,10 @@ public class MainActivity extends BaseActivity {
 //        LogTestJni logTestJni = new LogTestJni(this);
 //        logTestJni.startTest();
 
-        ModuleJniTest moduleJniTest = new ModuleJniTest(this);
-        moduleJniTest.startTest();
+//        ModuleJniTest moduleJniTest = new ModuleJniTest(this);
+//        moduleJniTest.startTest();
+
+        ThreadTest threadTest = new ThreadTest(this);
+        threadTest.startTest();
     }
 }

@@ -1,14 +1,16 @@
 #include <jni.h>
 #include <thread>
 #include <unistd.h>
+#include "thirdparty/WSThreadTest.h"
 
 //
 // Created by ZaneWang on 2023/4/17.
 //
 
 pthread_t m_pTestThread = 0;
+
 //pthread_t* m_pTestThread2 = 0;
-void* run(void* arg);
+void *run(void *arg);
 
 int calc();
 
@@ -16,7 +18,7 @@ extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ThreadTe
     pthread_create(&m_pTestThread, nullptr, run, nullptr);
 }
 
-void* run(void* arg) {
+void *run(void *arg) {
 //    pthread_create(m_pTestThread2, nullptr, run, nullptr);
     while (true) {
         int b = calc();
@@ -30,4 +32,18 @@ int calc() {
         a = a + i;
     }
     return a;
+}
+
+
+WSThreadTest ws_thread_;
+
+extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ThreadTest_webrtcThreadTest(JNIEnv *env, jobject thiz) {
+    ws_thread_.start();
+//    ws_thread_ = new WSThreadTest();
+//    ws_thread_->start();
+}
+
+extern "C" JNIEXPORT void JNICALL Java_com_example_mycxxapplication_jni_ThreadTest_webrtcThreadStopTest(JNIEnv *env, jobject thiz) {
+    ws_thread_.stop();
+//    ws_thread_->stop();
 }

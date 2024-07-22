@@ -11,8 +11,27 @@ public class ThreadTest extends BaseTest{
    @Override
    public void startTest() {
       super.startTest();
-      nativeStartTest();
+//      nativeStartTest();
+
+      webrtcThreadTest();
+
+      new Thread(new Runnable() {
+         @Override
+         public void run() {
+            try {
+               Thread.sleep(5000);
+            } catch (InterruptedException e) {
+               throw new RuntimeException(e);
+            }
+            webrtcThreadStopTest();
+//            webrtcThreadTest();
+         }
+      }).start();
    }
 
    private native void nativeStartTest();
+
+   private native void webrtcThreadTest();
+
+   private native void webrtcThreadStopTest();
 }
